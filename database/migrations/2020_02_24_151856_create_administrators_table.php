@@ -14,8 +14,9 @@ class CreateAdministratorsTable extends Migration
     public function up()
     {
         Schema::create('administrators', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('username')->primary();
+            $table->string('password');
+            $table->string('email');
         });
     }
 

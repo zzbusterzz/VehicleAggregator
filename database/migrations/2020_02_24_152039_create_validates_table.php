@@ -14,8 +14,10 @@ class CreateValidatesTable extends Migration
     public function up()
     {
         Schema::create('validates', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('admin_username');
+            $table->integer('userid');
+            $table->integer('verification_status');
+            //Save document here
         });
     }
 

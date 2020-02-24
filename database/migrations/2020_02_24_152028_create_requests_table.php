@@ -15,19 +15,18 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->bigIncrements('booking_id');
-            $table->bigIncrements('service_id');
-            $table->bigIncrements('vehiclebrand_id');
-            $table->bigIncrements('location_id');
-            $table->bigIncrements('customer_id');
-            $table->bigIncrements('serviceprovider_id');
+            $table->integer('service_id');
+            $table->integer('vehiclebrand_id');
+            $table->integer('location_id');
+            $table->integer('customer_id');
+            $table->integer('serviceprovider_id');
             $table->date('appointment_date');
-            $table->string('appointment_time');
+            $table->time('appointment_time');
             $table->date('booking_date');
-            $table->string('booking_time');
+            $table->time('booking_time');
             $table->string('vehicleno');
-            $table->intval('yearofmfc');
+            $table->smallInteger('yearofmfc');
             $table->string('status');
-            $table->timestamps();
         });
     }
 

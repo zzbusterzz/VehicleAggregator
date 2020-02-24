@@ -14,9 +14,9 @@ class CreateProvidedBiesTable extends Migration
     public function up()
     {
         Schema::create('provided_by', function (Blueprint $table) {
-            $table->bigIncrements('serviceprovider_id');
-            $table->bigIncrements('location_id');
-            $table->bigIncrements('service_id');
+            $table->integer('serviceprovider_id');
+            $table->integer('location_id');
+            $table->integer('service_id');
             $table->timestamps();
         });
     }

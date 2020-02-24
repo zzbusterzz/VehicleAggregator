@@ -14,15 +14,14 @@ class CreateLocationsTable extends Migration
     public function up()
     {
         Schema::create('locations', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('h_no');
             $table->string('street');
             $table->string('locality');
             $table->string('city');
             $table->string('state');
-            $table->string('pincode');
-            $table->string('shopphone');
-            $table->timestamps();
+            $table->integer('pincode');
+            $table->integer('shopphone');
         });
     }
 
