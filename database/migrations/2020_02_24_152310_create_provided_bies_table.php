@@ -17,7 +17,6 @@ class CreateProvidedBiesTable extends Migration
             $table->integer('serviceprovider_id');
             $table->integer('location_id');
             $table->integer('service_id');
-            $table->timestamps();
         });
     }
 

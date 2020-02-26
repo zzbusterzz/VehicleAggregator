@@ -16,9 +16,9 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('vehicle_brand_id');
-            $table->string('name');
-            $table->string('partcategory');
-            $table->string('partdetails');
+            $table->string('name',64);
+            $table->string('partcategory',64);
+            $table->text('partdetails');
             $table->integer('partprice');
         });
     }

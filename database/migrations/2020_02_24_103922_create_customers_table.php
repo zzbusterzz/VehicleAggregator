@@ -15,10 +15,10 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');            
-            $table->string('username');
-            $table->string('firstname'); //varchar(255)
-            $table->string('lastname');
-            $table->string('password');
+            $table->string('username',128);
+            $table->string('firstname',128); //varchar(255)
+            $table->string('lastname',128);
+            $table->string('password',64);
             $table->integer('phone');
             $table->string('email');
         });

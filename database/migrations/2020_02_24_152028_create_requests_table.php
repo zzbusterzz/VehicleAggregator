@@ -24,7 +24,7 @@ class CreateRequestsTable extends Migration
             $table->time('appointment_time');
             $table->date('booking_date');
             $table->time('booking_time');
-            $table->string('vehicleno');
+            $table->string('vehicleno',32);
             $table->smallInteger('yearofmfc');
             $table->string('status');
         });
