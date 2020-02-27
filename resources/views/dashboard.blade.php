@@ -84,7 +84,7 @@
             </form>
         </div>
 
-       
+
 
         <div id="bookform_container" class="bookVehicle" style="display:none">
             <form id="form_100455" class="appnitro" method="post" action="">
@@ -178,7 +178,7 @@
             type:"get",
             url:'/getStates',
             success:function(res)
-            {       
+            {
                 if(res)
                 {
                     var op = " ";
@@ -283,6 +283,5 @@
             $("#bookform_container").hide(); //Hide description form
         }
     });
-        
+
 </script>
-    
