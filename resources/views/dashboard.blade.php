@@ -15,7 +15,7 @@
         <b>Dashboard</b>
 
         <div id="form_container">
-            <form id="form_100455" class="appnitro" action="">
+            <form id="form_100455" class="appnitro" action="" method="post" action="">
                 <label>Choose the service which you require available in above location : </label>
 
                 <div>
@@ -46,7 +46,6 @@
                 
                
             <div id="descp">
-            <form id="formDes" class="formDes">
                 <ul >
                     <li id="li_1" >
                         <label>Shop Detaillls </label>
@@ -78,16 +77,12 @@
                             </div>
                         </li>
                     </ul>
-                </form>	
             </div>
-
-            </form>
         </div>
 
 
 
         <div id="bookform_container" class="bookVehicle" style="display:none">
-            <form id="form_100455" class="appnitro" method="post" action="">
                 <div class="form_description">
                     <h2>Appointment Selection</h2>
                     <p></p>
@@ -101,19 +96,19 @@
                     <li id="li_1">
                         <label class="description" for="element_1">Appointment Time </label>
                         <span>
-                  <input id="element_1_1" name="element_1_1" class="element text " size="2" type="text" maxlength="2" value=""/> : 
+                  <input id="HH" name="HH" class="element text " size="2" type="text" maxlength="2" value=""/> : 
                   <label>HH</label>
                   </span>
                         <span>
-                  <input id="element_1_2" name="element_1_2" class="element text " size="2" type="text" maxlength="2" value=""/> : 
+                  <input id="MM" name="MM" class="element text " size="2" type="text" maxlength="2" value=""/> : 
                   <label>MM</label>
                   </span>
                         <span>
-                  <input id="element_1_3" name="element_1_3" class="element text " size="2" type="text" maxlength="2" value=""/>
+                  <input id="SS" name="SS" class="element text " size="2" type="text" maxlength="2" value=""/>
                   <label>SS</label>
                   </span>
                         <span>
-                     <select class="element select" style="width:4em" id="element_1_4" name="element_1_4">
+                     <select class="element select" style="width:4em" id="AMPM" name="AMPM">
                         <option value="AM" >AM</option>
                         <option value="PM" >PM</option>
                      </select>
@@ -121,42 +116,36 @@
                   </span>
                     </li>
                     <li id="li_2">
-                        <label class="description" for="element_2">Vehicle Reg No: </label>
+                        <label class="description" for="vehicleno">Vehicle Reg No: </label>
                         <div>
-                            <input id="element_2" name="element_2" class="element text medium" type="text" maxlength="255" value="" />
+                            <input id="vehicleno" name="vehicleno" class="element text medium" type="text" maxlength="255" value="" />
                         </div>
                     </li>
                     <li id="li_4">
-                        <label class="description" for="element_4">Brand Name </label>
+                        <label class="description" for="brandname">Brand Name</label>
                         <div>
-                            <select class="element select medium" id="element_4" name="element_4">
-                                <option value="" selected="selected"></option>
-                                <option value="1">First option</option>
-                                <option value="2">Second option</option>
-                                <option value="3">Third option</option>
+                            <select class="element select medium" id="brandname" name="brandname">
+                                <option value="">Select Vehicle Brand</option>
+                               
                             </select>
                         </div>
                     </li>
                     <li id="li_5">
-                        <label class="description" for="element_5">Brand Model </label>
+                        <label class="description" for="brandmodel">Brand Model</label>
                         <div>
-                            <select class="element select medium" id="element_5" name="element_5">
-                                <option value="" selected="selected"></option>
-                                <option value="1">First option</option>
-                                <option value="2">Second option</option>
-                                <option value="3">Third option</option>
+                            <select class="element select medium" id="brandmodel" name="brandmodel">
+                                <option value="">Select Vehicle Model</option>
                             </select>
                         </div>
                     </li>
                     <li id="li_3">
-                        <label class="description" for="element_3">Year of Mfg </label>
+                        <label class="description" for="yrofmfg">Year of Mfg </label>
                         <div>
-                            <input id="element_3" name="element_3" class="element text medium" type="text" maxlength="255" value="" />
+                            <input id="yrofmfg" name="yrofmfg" class="element text medium" type="text" maxlength="255" value="" />
                         </div>
                     </li>
                     <li class="buttons">
-                        <input type="hidden" name="form_id" value="100455" />
-                        <input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+                        <input id="submitBooking" class="Book Service" type="submit" name="submitBooking" value="Submit"/>
                     </li>
                 </ul>
             </form>
@@ -195,7 +184,7 @@
 
     $(document.body).on('change',"#state",function (e) {
         var value = $(this).val();
-        if(value != " " || value != "Select State"){
+        if(value != " " && value != "Select State"){
             $.ajax({
                 type:"get",
                 url:'/getCities/'+ value,
@@ -228,7 +217,7 @@
         var state = $("#state").val();
         var city = $(this).val();
 
-        if(city != " " || city != "Select Cityr"){
+        if(city != " " && city != "Select Cityr"){
             $.ajax({
                 type:"get",
                 url:'/getLocations/'+ state + "/" + city,
@@ -262,20 +251,26 @@
     });
 
     $(document.body).on('change',"#ServiceProviders",function (e) {
-        var value = $(this).attr("id");
+        var value = $( "#ServiceProviders option:selected" ).text();
         var id = $(this).val();
         //'id', 'h_no', 'street', 'locality', 'city', 'state', 'pincode', 'shopphone', 'shopname'
-        if(ServiceProviders != " " || ServiceProviders != "Pick a provider" && tempLocations.length > 0){
+    
+      //  console.log(value.localeCompare("Pick a provider"));
+        if(value != " " && value != "Pick a provider" && tempLocations.length > 0){
             $("#descp").show(); //Hide description form
             $("#bookform_container").show(); //Hide description form
 
-            console.log(id);
-            console.log(tempLocations[id][8]);
+          //  console.log(id);
+          //  console.log(tempLocations[id][8]);
             $(shopName).val(tempLocations[id][8]);
             $(address_disp).val(tempLocations[id][1] + "," + tempLocations[id][2] +  ", " + tempLocations[id][3]);
             $(city_disp).val(tempLocations[id][4]);
             $(state_disp).val(tempLocations[id][5]);
             $(zip_code).val(tempLocations[id][6]);
+
+            if($('#brandname option').length <= 1){
+                UpdateBrand();
+            }
         }
 
         if(value == "Pick a provider"){           
@@ -283,5 +278,64 @@
             $("#bookform_container").hide(); //Hide description form
         }
     });
+    
+    function UpdateBrand(){
+       console.log("updating brand");
 
+        $.ajax({
+            type:"get",
+            url:'/getBrandnames',
+            success:function(res)
+            {       
+                if(res)
+                {
+                    tempLocations.length = 0;
+                    var op = " ";
+
+                    $("#brandname").empty();
+                    $("#brandname").append('<option>Select Vehicle Brand</option>');
+                    for (var i = 0; i < res.length; i++){
+                        op += '<option value="'+ i +'">'+res[i].brandname+'</option>';
+                    }
+                    $("#brandname").append(op);
+                }
+            }
+        }); 
+       
+    }
+
+    $(document.body).on('change',"#brandname",function (e) {
+        var brandName = $( "#brandname option:selected" ).text();;
+        if(brandName != " " && brandName != "Select Vehicle Brand"){
+            console.log("brand");
+            $.ajax({
+                type:"get",
+                url:'/getBrandmodels/'+ brandName,
+                success:function(res)
+                {       
+                    if(res)
+                    {
+                        tempLocations.length = 0;
+                        var op = " ";
+
+                        $("#brandmodel").empty();
+                        $("#brandmodel").append('<option>Select Vehicle Model</option>');
+                        for (var i = 0; i < res.length; i++){
+                            op += '<option value="'+res[i].id+'">'+res[i].model+'</option>';
+                        }
+                        $("#brandmodel").append(op);
+                    }
+                }
+            });
+
+           
+        }
+
+        if(brandName == "Pick a provider"){           
+            //Disable submit button
+           /// $("#submitBooking").hide();            
+        }
+    });
+
+  
 </script>

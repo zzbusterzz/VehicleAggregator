@@ -35,24 +35,66 @@ class BookingsController extends Controller
                                 ['city', $city],
                                 ])->get();
         
-        // $a=array();
-
-        // foreach($shopsLocations as $location){
-        //     $Location = new Customer([
-        //         'id' => $location->id,
-        //         'h_no' => $location->h_no,
-        //         'street' => $location->street,
-        //         'locality' => $location->locality,
-        //         'city' => $location->city,
-        //         'state' => $location->state,
-        //         'pincode' => $location->pincode,
-        //         'shopphone' => $location->shopphone,
-        //         'shopname' => $location->shopname,
-        //     ]);
-        //     array_push($a, $Location );
-        // }
+       
            
 
         return response()->json($shopsLocations);
+    }
+
+    function fetchBrands()
+    {
+        $brandNames  =  DB::table('vehicles')
+                        ->distinct()
+                        ->select('brandname')->get();
+
+        return response()->json($brandNames);
+    }
+
+    function fetchModels($brandName)
+    {
+        $brandModel  =  DB::table('vehicles')
+                        ->where([
+                            ['brandname',$brandName]
+                            ])->get();           
+
+        return response()->json($brandModel);
+    }
+
+    function bookservice(Request $req){
+
+        $this->validate($req, [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        //location_id
+        //service_id
+        //serviceprovider id needed
+        $location_id = $req->input('location_id');
+        $service_id = $req->input('service_id'); 
+
+        //booking_id 
+        //service_id
+        //vehiclebrand_id
+        //location_id
+        //customer_id
+        //serviceprovider_id
+        //appointment_date
+        //appointment_time
+        //booking_date
+        //booking_time
+        //vehicleno
+        //yearofmfc
+        //status
+        
+        
+
+         DB::insert('insert into customers  (booking_id, service_id, vehiclebrand_id, location_id, customer_id, serviceprovider_id, 
+                                            appointment_date, appointment_time, booking_date, booking_time, vehicleno, yearofmfc, status) 
+                                     values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                                     [null, $service_id, $vehiclebrand_id, $location_id, $customer_id, $serviceprovider_id, 
+                                     $appointment_date, $appointment_time, $booking_date, $booking_time, $vehicleno, $yearofmfc, 'Pending']);
+
+       
     }
 }
