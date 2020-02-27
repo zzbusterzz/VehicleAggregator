@@ -1,1 +1,2 @@
 https://laravel.com/docs/5.3/migrations#creating-tables //Migration tablel column specifiers
+https://stackoverflow.com/questions/28277955/laravel-unknown-column-updated-at //Ignore timestamps

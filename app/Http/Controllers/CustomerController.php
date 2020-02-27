@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+//use DB;
 
 class CustomerController extends Controller
 {
@@ -35,10 +36,10 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $this->validate($request, [            
+            'username' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
-            'username' => 'required',
             'password' => 'required',
             'confirmpass' => 'required',
             'phone' => 'required',
@@ -46,14 +47,25 @@ class CustomerController extends Controller
         ]);
 
         $customers = new Customer([
+            'username' => $request->get('username'),
             'firstname' => $request->get('firstname'),
             'lastname' => $request->get('lastname'),
-            'username' => $request->get('username'),
             'password' => $request->get('confirmpass'),
             'phone' => $request->get('phone'),
             'email' => $request->get('email'),
         ]);
         $customers->save();
+
+        // $username = $request->get('username');
+        // $firstname = $request->get('firstname');
+        // $lastname = $request->get('lastname');
+        // $password = $request->get('confirmpass');
+        // $phone = $request->get('phone');
+        // $email = $request->get('email');
+
+        // DB::insert('insert into customers  (id, username, firstname, lastname, password, phone, email) 
+        //                             values (?, ?, ?, ?, ?, ?, ?)', [null, $username, $firstname, $lastname, $password, $phone, $email]);
+
         return redirect()->route('customer.create')->with('success', 'Data Added');
     }
 

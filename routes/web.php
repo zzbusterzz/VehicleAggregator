@@ -11,11 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () {//Default route to login
     return view('login.login');
+  //return view('customer.create');
 });
 
-
 Route::post('/loginme', 'LoginController@login');
-
 Route::resource('customer', 'CustomerController');
+
+Route::view('/login', 'login.login');
+Route::view('/register', 'customer.create');
+Route::view('/dashboard', 'dashboard');
