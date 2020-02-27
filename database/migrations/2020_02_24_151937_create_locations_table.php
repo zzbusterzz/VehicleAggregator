@@ -22,6 +22,7 @@ class CreateLocationsTable extends Migration
             $table->string('state',64);
             $table->integer('pincode');
             $table->integer('shopphone');
+            $table->string('shopname',128);
         });
     }
 

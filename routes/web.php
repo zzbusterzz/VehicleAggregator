@@ -26,3 +26,4 @@ Route::view('/dashboard', 'dashboard');
 
 Route::get('/getStates','BookingsController@fetchStates');
 Route::get('/getCities/{state}','BookingsController@fetchCities');
+Route::get('/getLocations/{state}/{cities}','BookingsController@fetchServiceProviders');
