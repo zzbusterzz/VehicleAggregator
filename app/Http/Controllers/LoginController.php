@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use DB;
 
 class LoginController extends Controller
@@ -101,13 +102,19 @@ class LoginController extends Controller
         $checkLogin = DB::table('customers')->where(['username'=>$username, 'password'=>$password])->get();
         if(count ($checkLogin) > 0){
             echo "Login Successfull";
+            $id = $checkLogin->first()->id;
+
             
+            $req->session()->put('user_id', $id);
+            $req->session()->put('user_name', $username);
+            return redirect('dashboard');
+           // return redirect()->route('dashboard');
         }
         else{
             echo "Login Failed";
         }
 
-        return redirect('dashboard');
+      
         //redirect()->route('customer.create');
     }
 }
