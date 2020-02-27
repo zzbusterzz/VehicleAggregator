@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use DB;
 
 class BookingsController extends Controller
 {
@@ -18,6 +19,24 @@ class BookingsController extends Controller
         return view('dashboard')->with('services', $hr_request);
     }
 
+    function fetchStates()
+    {
+        $states  =  DB::table('locations')
+                    ->distinct()
+                    ->select('state')->get();
+
+        return response()->json($states);    
+    }
+
+    function fetchCities($state)
+    {
+        $cities  =  DB::table('locations')
+                    ->distinct()
+                    ->select('city')
+                    ->where('state', $state)->get();
+
+        return response()->json($cities);    
+    }
     /**
      * Show the form for creating a new resource.
      *
