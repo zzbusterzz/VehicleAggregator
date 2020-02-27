@@ -94,11 +94,6 @@ class LoginController extends Controller
         $username = $req->input('username');
         $password = $req->input('password');
 
-        // $checkLogin = Customer::where([
-        //     'username' => $username,
-        //     'password' => $password
-        // ])->get();
-
         $checkLogin = DB::table('customers')->where(['username'=>$username, 'password'=>$password])->get();
         if(count ($checkLogin) > 0){
             echo "Login Successfull";
