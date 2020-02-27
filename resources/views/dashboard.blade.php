@@ -36,8 +36,8 @@
                             <option value="">Select State</option>
                         </select>
                     </div>
-                    
-                    
+
+
                     <div class="form-group">
                         <select name="city" id="city" class="form-control input-lg">
                             <option value="">Select City</option>
@@ -46,12 +46,12 @@
 
                 </div>
 
-               
+
 
             </form>
         </div>
 
-       
+
 
     </body>
 
@@ -64,7 +64,7 @@
             type:"get",
             url:'/getStates',
             success:function(res)
-            {       
+            {
                 if(res)
                 {
                     var op = " ";
@@ -86,7 +86,7 @@
             type:"get",
             url:'/getCities/'+ value,
             success:function(res)
-            {       
+            {
                 if(res)
                 {
                     var op = " ";
@@ -100,6 +100,5 @@
             }
         });
     });
-        
+
 </script>
-    

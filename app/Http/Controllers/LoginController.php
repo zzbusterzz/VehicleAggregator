@@ -104,7 +104,7 @@ class LoginController extends Controller
             echo "Login Successfull";
             $id = $checkLogin->first()->id;
 
-            
+
             $req->session()->put('user_id', $id);
             $req->session()->put('user_name', $username);
             return redirect('dashboard');
@@ -114,7 +114,7 @@ class LoginController extends Controller
             echo "Login Failed";
         }
 
-      
+
         //redirect()->route('customer.create');
     }
 }
