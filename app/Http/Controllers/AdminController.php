@@ -15,7 +15,8 @@ class AdminController extends Controller
 
         $checkLogin = DB::table('administrators')->where(['username'=>$username, 'password'=>$password])->get();
         if(count ($checkLogin) > 0){
-            echo "Login Successfull";
+            echo "Welcome! ".$username;
+
         }
         else{
             echo "Login Failed";
