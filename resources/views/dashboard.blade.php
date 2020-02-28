@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Document</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -15,7 +16,7 @@
         <b>Dashboard</b>
 
         <div id="form_container">
-            <form id="form_100455" class="appnitro" action="" method="post" action="">
+            <form id="form_100455" class="appnitro">
                 <label>Choose the service which you require available in above location : </label>
 
                 <div>
@@ -104,11 +105,7 @@
                   <label>MM</label>
                   </span>
                         <span>
-                  <input id="SS" name="SS" class="element text " size="2" type="text" maxlength="2" value=""/>
-                  <label>SS</label>
-                  </span>
-                        <span>
-                     <select class="element select" style="width:4em" id="AMPM" name="AMPM">
+                        <select class="element select" style="width:4em" id="AMPM" name="AMPM">
                         <option value="AM" >AM</option>
                         <option value="PM" >PM</option>
                      </select>
@@ -289,7 +286,6 @@
             {       
                 if(res)
                 {
-                    tempLocations.length = 0;
                     var op = " ";
 
                     $("#brandname").empty();
@@ -315,7 +311,6 @@
                 {       
                     if(res)
                     {
-                        tempLocations.length = 0;
                         var op = " ";
 
                         $("#brandmodel").empty();
@@ -337,5 +332,69 @@
         }
     });
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+            //booking_id    X
+        //service_id
+        //vehiclebrand_id
+        //location_id
+        //customer_id       X
+        //serviceprovider_idX
+        //appointment_date
+        //appointment_time
+        //booking_date
+        //booking_time
+        //vehicleno
+        //yearofmfc
+        //status
+
+    $("#submitBooking").click(function(e){
+        e.preventDefault();
+        console.log("cllicking button");
+
+        var id = $('#ServiceProviders').val();
+        console.log(tempLocations.length);
+
+        var service_id          = $("#Service").val();
+        var vehiclebrand_id     = $("#brandmodel").val();
+        var location_id         = tempLocations[id][0];
+
+        $date=$("#aptDate").val();
+        var appointment_date    = $date;
+        console.log( appointment_date);
+
+        $ampm = $( "#AMPM option:selected" ).text();
+
+        var appointment_time ;
+        var hrs = $("#HH").val();
+        hrs = parseInt(hrs) + 12 ;
+        if($ampm == "PM")
+            appointment_time    = hrs  + ":" + $("#MM").val() + ":00";
+
+        var today = new Date();
+        var booking_date        = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        console.log( booking_date);
+        var booking_time        = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        console.log( booking_time);
+
+        var vehicleno           = $("#vehicleno").val();
+        var yearofmfc           = $("#yrofmfg").val();
+
+        $.ajax({
+            type:'POST',
+            url:'/registerBooking',
+            data:{  service_id:service_id, vehiclebrand_id:vehiclebrand_id, location_id:location_id, appointment_date:appointment_date,
+                    appointment_time:appointment_time, booking_date:booking_date, booking_time:booking_time, vehicleno:vehicleno, yearofmfc:yearofmfc
+            },
+
+            success:function(data){
+                alert(data.success);
+            }
+        });
+    });
   
 </script>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Customer;
+use App\Requests;
 use DB;
 
 class BookingsController extends Controller
@@ -61,12 +61,6 @@ class BookingsController extends Controller
     }
 
     function bookservice(Request $req){
-
-        $this->validate($req, [
-            'username' => 'required',
-            'password' => 'required',
-        ]);
-
         //location_id
         //service_id
         //serviceprovider id needed
@@ -74,9 +68,9 @@ class BookingsController extends Controller
         $service_id = $req->input('service_id'); 
 
         //booking_id 
-        //service_id
-        //vehiclebrand_id
-        //location_id
+        //service_id        X
+        //vehiclebrand_id   X
+        //location_id       X
         //customer_id
         //serviceprovider_id
         //appointment_date
@@ -86,15 +80,59 @@ class BookingsController extends Controller
         //vehicleno
         //yearofmfc
         //status
-        
-        
-
-         DB::insert('insert into customers  (booking_id, service_id, vehiclebrand_id, location_id, customer_id, serviceprovider_id, 
-                                            appointment_date, appointment_time, booking_date, booking_time, vehicleno, yearofmfc, status) 
-                                     values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-                                     [null, $service_id, $vehiclebrand_id, $location_id, $customer_id, $serviceprovider_id, 
-                                     $appointment_date, $appointment_time, $booking_date, $booking_time, $vehicleno, $yearofmfc, 'Pending']);
-
+        $serviceProvID  =  DB::table('provided_by')
+                        ->select('serviceprovider_id')
+                        ->where([
+                            ['location_id',$location_id],
+                            ['service_id',$service_id]
+                            ])->value('serviceprovider_id');;  
        
+        
+            
+        $serviceprovider_id = $serviceProvID;
+        
+
+        $vehiclebrand_id = $req->input('vehiclebrand_id');
+        //$serviceprovider_id  = '2';
+        //print("Controllller +" + $serviceprovider_id);
+        //$serviceProvID->get("serviceprovider_id"); 
+        $customer_id =  $req->session()->get('user_id');
+        $appointment_date = $req->input('appointment_date');
+        $appointment_time = $req->input('appointment_time'); 
+        $booking_date = $req->input('booking_date');
+        $booking_time = $req->input('booking_time'); 
+        $vehicleno = $req->input('vehicleno');
+        $yearofmfc = $req->input('yearofmfc'); 
+                           
+       
+        // $request = new Requests([
+        //     'service_id' => $service_id,
+        //     'vehiclebrand_id' => $vehiclebrand_id,
+        //     'location_id' => $location_id,
+        //     'customer_id' => $customer_id,
+        //     'serviceprovider_id' => $serviceProvID,
+        //     'appointment_date' => $appointment_date,
+        //     'appointment_time' => $appointment_time,
+        //     'booking_date' => $booking_date,
+        //     'booking_time' => $booking_time,
+        //     'vehicleno' => $vehicleno,
+        //     'yearofmfc' => $yearofmfc,
+        //     'status' => 'Pending'
+        // ]);
+        // $request->save();
+        
+                    
+        $checkInsert = DB::insert('insert into requests  (booking_id, service_id, vehiclebrand_id, location_id, customer_id, serviceprovider_id, 
+                                        appointment_date, appointment_time, booking_date, booking_time, vehicleno, yearofmfc, status) 
+                                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                                    [null, $service_id, $vehiclebrand_id, $location_id, $customer_id, $serviceprovider_id, 
+                                    $appointment_date, $appointment_time, $booking_date, $booking_time, $vehicleno, $yearofmfc, 'Pending']);
+
+        if($checkInsert){
+            echo 'Query was successfull';
+            return redirect()->route('dashboard')->with('success', 'Data Added');
+        }
+        else
+            echo 'There was some error';
     }
 }
