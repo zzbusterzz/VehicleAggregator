@@ -3,11 +3,16 @@
 @section('content')
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CarServices</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.js" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+    .box{
+        width:600px;
+        margin:0 auto;
+        border:1px solid #ccc;
+    }
+    </style>
 </head>
 
 <div class="row">
@@ -69,7 +74,7 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <input type="submit" name="submit" class="btn btn-primary"/>
+                    <input type="submit" name="submit" value="Register" class="btn btn-primary"/>
                 </div>
 
                 </form>

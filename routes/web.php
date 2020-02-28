@@ -16,18 +16,16 @@ Route::get('/', function () {//Default route to login
   //return view('customer.create');
 });
 
-
+Route::view('/login', 'login.login');
 Route::post('/loginme', 'LoginController@login');
 Route::post('/registerBooking', 'BookingsController@bookservice');
+Route::post('/login', 'LoginController@login')->name('login');
 
 Route::resource('customer', 'CustomerController');
 
-Route::view('/login', 'login.login');
 Route::view('/register', 'customer.create');
-
 Route::post('/register', 'CustomerController@login')->name('register');
 
-Route::post('/login', 'LoginController@login')->name('login');
 
 Route::view('/type', 'accountType');
 Route::post('/type', 'TypeController@login')->name('accountType');
@@ -42,7 +40,6 @@ Route::get('/getBrandnames','BookingsController@fetchBrands');
 Route::get('/getBrandmodels/{brandName}','BookingsController@fetchModels');
 
 
-
 Route::get('/type', function () {
     return view('userType');
 });
@@ -50,5 +47,6 @@ Route::get('/type', function () {
 Route::get('/admin', function () {
     return view('login/adminLogin');
 });
+Route::post('/adminSignin', 'AdminController@adminSignin');
 
 

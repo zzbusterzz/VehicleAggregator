@@ -5,18 +5,23 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style type="text/css">
+        .box{
+            width:600px;
+            margin:0 auto;
+            border:1px solid #ccc;
+        }
+        </style>
     </head>
     <body>
+        <div class="form-group">
+            <h3 align="center">Log IN</h3>
+        </div>
+
         <form action="/loginme" method="POST">
             {{csrf_field()}}
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -29,6 +34,9 @@
         </div>
         <div class="form-group">
             <input type="submit" name="login" value="Log IN" class="btn btn-primary"/>
+        </div>
+        <div class="form-group">
+        <a href="{{ route('register') }}"><h5>Need a new account? Register Here!</h5></a>
         </div>
 
         </form>
