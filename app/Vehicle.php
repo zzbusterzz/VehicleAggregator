@@ -8,4 +8,8 @@ class Vehicle extends Model
 {
     //
     public $timestamps = false;
+
+    protected $fillable = [
+        'id', 'brandname', 'model'
+    ];
 }

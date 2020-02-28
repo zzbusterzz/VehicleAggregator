@@ -18,6 +18,7 @@ Route::get('/', function () {//Default route to login
 
 Route::view('/login', 'login.login');
 Route::post('/loginme', 'LoginController@login');
+Route::post('/registerBooking', 'BookingsController@bookservice');
 Route::post('/login', 'LoginController@login')->name('login');
 
 Route::resource('customer', 'CustomerController');
@@ -33,6 +34,11 @@ Route::view('/dashboard', 'dashboard');
 
 Route::get('/getStates','BookingsController@fetchStates');
 Route::get('/getCities/{state}','BookingsController@fetchCities');
+Route::get('/getLocations/{state}/{cities}','BookingsController@fetchServiceProviders');
+
+Route::get('/getBrandnames','BookingsController@fetchBrands');
+Route::get('/getBrandmodels/{brandName}','BookingsController@fetchModels');
+
 
 Route::get('/type', function () {
     return view('userType');
