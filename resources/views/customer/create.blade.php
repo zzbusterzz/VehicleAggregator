@@ -77,7 +77,12 @@
                     <input type="submit" name="submit" value="Register" class="btn btn-primary"/>
                 </div>
 
+
+
                 </form>
+                <div class="form-group">
+                    <a href="{{ route('login') }}"><input type="submit" name="submit" value="Login" class="btn btn-primary"/></a>
+                </div>
         </div>
 </div>
 @endsection

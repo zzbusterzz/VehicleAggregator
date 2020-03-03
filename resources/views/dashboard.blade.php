@@ -8,7 +8,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Document</title>
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <style type="text/css">
@@ -39,8 +40,8 @@
                     <select name="state" id="state">
                         <option value="">Select State</option>
                     </select>
-                </div>  
-                
+                </div>
+
                 <div class="form-group">
                     <select name="city" id="city" >
                         <option value="">Select City</option>
@@ -52,32 +53,32 @@
                         <option value="">Pick a provider</option>
                     </select>
                 </div>
-                
-               
+
+
             <div id="descp">
                 <ul >
                     <li id="li_1" >
                         <label>Shop Detaillls </label>
-            
+
                             <div>
                                 <label >Shop Name</label>
                                 <input id="shopName" name="shopName" class="element text large" value="" type="text" disabled>
                             </div>
-                        
+
                             <div>
                                 <label >Address</label>
                                 <input id="address_disp" name="address_disp" class="element text large" value="" type="text" disabled>
                             </div>
-                        
+
                             <div class="left">
                                 <label >City</label>
                                 <input id="city_disp" name="city_disp" class="element text medium" value="" type="text" disabled>
                             </div>
-                            
+
                             <div class="right">
                                 <label>State / Province / Region</label>
                                 <input id="state_disp" name="state_disp" class="element text medium" value="" type="text" disabled>
-                                
+
                             </div>
 
                             <div class="left">
@@ -105,11 +106,11 @@
                     <li id="li_1">
                         <label class="description" for="element_1">Appointment Time </label>
                         <span>
-                  <input id="HH" name="HH" class="element text " size="2" type="text" maxlength="2" value=""/> : 
+                  <input id="HH" name="HH" class="element text " size="2" type="text" maxlength="2" value=""/> :
                   <label>HH</label>
                   </span>
                         <span>
-                  <input id="MM" name="MM" class="element text " size="2" type="text" maxlength="2" value=""/> : 
+                  <input id="MM" name="MM" class="element text " size="2" type="text" maxlength="2" value=""/> :
                   <label>MM</label>
                   </span>
                         <span>
@@ -131,7 +132,7 @@
                         <div>
                             <select class="element select medium" id="brandname" name="brandname">
                                 <option value="">Select Vehicle Brand</option>
-                               
+
                             </select>
                         </div>
                     </li>
@@ -167,7 +168,7 @@
     $("#bookform_container").hide(); //Hide description form
 
     $(document.body).on('change',"#Service",function (e) {
-       
+
         $.ajax({
             type:"get",
             url:'/getStates',
@@ -194,7 +195,7 @@
                 type:"get",
                 url:'/getCities/'+ value,
                 success:function(res)
-                {       
+                {
                     if(res)
                     {
                         var op = " ";
@@ -209,7 +210,7 @@
             });
         }
 
-        if(value == "Select State"){           
+        if(value == "Select State"){
             $("#city").empty();
             $("#city").append('<option>Select City</option>');
 
@@ -227,7 +228,7 @@
                 type:"get",
                 url:'/getLocations/'+ state + "/" + city,
                 success:function(res)
-                {       
+                {
                     if(res)
                     {
                         tempLocations.length = 0;
@@ -236,10 +237,10 @@
                         $("#ServiceProviders").empty();
                         $("#ServiceProviders").append('<option>Pick a provider</option>');
                         for (var i = 0; i < res.length; i++){
-                            op += '<option value="'+i+'">'+res[i].shopname + ", " + res[i].h_no + "," + res[i].street + 
+                            op += '<option value="'+i+'">'+res[i].shopname + ", " + res[i].h_no + "," + res[i].street +
                             ", " + res[i].locality +'</option>';
 
-                            var value = [   res[i].id,   res[i].h_no,  res[i].street , res[i].locality, 
+                            var value = [   res[i].id,   res[i].h_no,  res[i].street , res[i].locality,
                                             res[i].city, res[i].state, res[i].pincode, res[i].shopphone,  res[i].shopname ];
                             tempLocations.push(value);
                         }
@@ -249,7 +250,7 @@
             });
         }
 
-        if(city == "Select City"){           
+        if(city == "Select City"){
             $("#ServiceProviders").empty();
             $("#ServiceProviders").append('<option>Pick a provider</option>');
         }
@@ -259,7 +260,7 @@
         var value = $( "#ServiceProviders option:selected" ).text();
         var id = $(this).val();
         //'id', 'h_no', 'street', 'locality', 'city', 'state', 'pincode', 'shopphone', 'shopname'
-    
+
       //  console.log(value.localeCompare("Pick a provider"));
         if(value != " " && value != "Pick a provider" && tempLocations.length > 0){
             $("#descp").show(); //Hide description form
@@ -278,12 +279,12 @@
             }
         }
 
-        if(value == "Pick a provider"){           
+        if(value == "Pick a provider"){
             $("#descp").hide(); //Hide description form
             $("#bookform_container").hide(); //Hide description form
         }
     });
-    
+
     function UpdateBrand(){
        console.log("updating brand");
 
@@ -291,7 +292,7 @@
             type:"get",
             url:'/getBrandnames',
             success:function(res)
-            {       
+            {
                 if(res)
                 {
                     var op = " ";
@@ -304,8 +305,8 @@
                     $("#brandname").append(op);
                 }
             }
-        }); 
-       
+        });
+
     }
 
     $(document.body).on('change',"#brandname",function (e) {
@@ -316,7 +317,7 @@
                 type:"get",
                 url:'/getBrandmodels/'+ brandName,
                 success:function(res)
-                {       
+                {
                     if(res)
                     {
                         var op = " ";
@@ -331,12 +332,12 @@
                 }
             });
 
-           
+
         }
 
-        if(brandName == "Pick a provider"){           
+        if(brandName == "Pick a provider"){
             //Disable submit button
-           /// $("#submitBooking").hide();            
+           /// $("#submitBooking").hide();
         }
     });
 
@@ -404,5 +405,5 @@
             }
         });
     });
-  
+
 </script>

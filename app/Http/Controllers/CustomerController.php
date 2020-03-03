@@ -36,7 +36,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [            
+        $this->validate($request, [
             'username' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
@@ -63,7 +63,7 @@ class CustomerController extends Controller
         // $phone = $request->get('phone');
         // $email = $request->get('email');
 
-        // DB::insert('insert into customers  (id, username, firstname, lastname, password, phone, email) 
+        // DB::insert('insert into customers  (id, username, firstname, lastname, password, phone, email)
         //                             values (?, ?, ?, ?, ?, ?, ?)', [null, $username, $firstname, $lastname, $password, $phone, $email]);
 
         return redirect()->route('customer.create')->with('success', 'Data Added');
