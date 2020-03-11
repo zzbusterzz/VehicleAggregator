@@ -19,11 +19,8 @@ class CreateVendorsTable extends Migration
             $table->string('firstname',128); //varchar(255)
             $table->string('lastname',128);
             $table->string('password',64);
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('email');
-            $table->bigInteger('partid');
-            $table->integer('partquantity');
-            $table->integer('partprice');
         });
     }
 
