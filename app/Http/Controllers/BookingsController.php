@@ -12,15 +12,12 @@ class BookingsController extends Controller
     {
 
         $states = DB::table('locations')
-                    ->select('locations.id','locations.state')
+                    ->distinct()
+                    ->select('locations.state')
                     ->join('provided_by','provided_by.location_id','=','locations.id')
                     ->where('provided_by.service_id', $services )
                     ->get();
-
-        // $states  =  DB::table('locations')
-        //             ->distinct()
-        //             ->select('state')->get();
-
+                    
         return response()->json($states);    
     }
 
@@ -28,8 +25,13 @@ class BookingsController extends Controller
     {
         $cities  =  DB::table('locations')
                     ->distinct()
-                    ->select('city')
-                    ->where('state', $state)->get();
+                    ->select('locations.city')
+                    ->join('provided_by','provided_by.location_id','=','locations.id')
+                    ->where([
+                        ['provided_by.service_id', $services],
+                        ['state', $state]
+                     ])
+                    ->get();
 
         return response()->json($cities);    
     }
@@ -37,13 +39,13 @@ class BookingsController extends Controller
     function fetchServiceProviders($services, $state, $city)
     {
         $shopsLocations  =  DB::table('locations')
+                            ->join('provided_by','provided_by.location_id','=','locations.id')
                             ->where([
+                                ['provided_by.service_id', $services],
                                 ['state',$state],
                                 ['city', $city],
-                                ])->get();
-        
-       
-           
+                                ])
+                            ->get();
 
         return response()->json($shopsLocations);
     }
