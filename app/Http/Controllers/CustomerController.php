@@ -34,14 +34,16 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
         $this->validate($request, [
             'username' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
-            'password' => 'required',
-            'confirmpass' => 'required',
+            'password' => 'required|confirmed|min:6',
+            'password_confirmation' => 'required',
             'phone' => 'required',
             'email' => 'required',
         ]);
@@ -50,7 +52,7 @@ class CustomerController extends Controller
             'username' => $request->get('username'),
             'firstname' => $request->get('firstname'),
             'lastname' => $request->get('lastname'),
-            'password' => $request->get('confirmpass'),
+            'password' => $request->get('password'),
             'phone' => $request->get('phone'),
             'email' => $request->get('email'),
         ]);
@@ -66,7 +68,7 @@ class CustomerController extends Controller
         // DB::insert('insert into customers  (id, username, firstname, lastname, password, phone, email)
         //                             values (?, ?, ?, ?, ?, ?, ?)', [null, $username, $firstname, $lastname, $password, $phone, $email]);
 
-        return redirect()->route('customer.create')->with('success', 'Data Added');
+        return redirect()->route('customer.create')->with('success', 'Registration Complete. Please LOGIN!');
     }
 
     /**
