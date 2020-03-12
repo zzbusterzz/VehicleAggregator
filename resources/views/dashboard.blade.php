@@ -1,6 +1,8 @@
 @php( $services = \App\Service::all())
 
-<html lang="en">
+@extends('master')
+
+@section('content')
 
     <head>
         <meta charset="UTF-8">
@@ -158,9 +160,7 @@
         </div>
 
     </body>
-
-</html>
-
+    @endsection
 
 <script type="text/javascript">
     var tempLocations = new Array();

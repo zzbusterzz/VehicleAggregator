@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
+
 
 class LoginController extends Controller
 {
@@ -92,10 +94,12 @@ class LoginController extends Controller
         ]);
 
         $username = $req->input('username');
-        $password = $req->input('password');
+        
+        $checkLogin = DB::table('customers')->where(['username'=>$username])->get();
 
-        $checkLogin = DB::table('customers')->where(['username'=>$username, 'password'=>$password])->get();
-        if(count ($checkLogin) > 0){
+        if (Hash::check($req->input('password'), $checkLogin->first()->password))
+        {
+            // The passwords match...
             echo "Login Successfull";
             $id = $checkLogin->first()->id;
 
@@ -103,9 +107,7 @@ class LoginController extends Controller
             $req->session()->put('user_id', $id);
             $req->session()->put('user_name', $username);
             return redirect('dashboard');
-           // return redirect()->route('dashboard');
-        }
-        else{
+        } else{
             echo "Login Failed";
         }
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Customer;
 //use DB;
+
 
 class CustomerController extends Controller
 {
@@ -48,11 +50,15 @@ class CustomerController extends Controller
             'email' => 'required',
         ]);
 
+        $password = Hash::make($request->get('password'));
+        //$output->writeln($password);
+        echo $password ;
+
         $customers = new Customer([
             'username' => $request->get('username'),
             'firstname' => $request->get('firstname'),
             'lastname' => $request->get('lastname'),
-            'password' => $request->get('password'),
+            'password' => $password,
             'phone' => $request->get('phone'),
             'email' => $request->get('email'),
         ]);
