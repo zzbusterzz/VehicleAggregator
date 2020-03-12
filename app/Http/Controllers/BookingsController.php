@@ -8,16 +8,23 @@ use DB;
 
 class BookingsController extends Controller
 {
-    function fetchStates()
+    function fetchStates($services)
     {
-        $states  =  DB::table('locations')
-                    ->distinct()
-                    ->select('state')->get();
+
+        $states = DB::table('locations')
+                    ->select('locations.id','locations.state')
+                    ->join('provided_by','provided_by.location_id','=','locations.id')
+                    ->where('provided_by.service_id', $services )
+                    ->get();
+
+        // $states  =  DB::table('locations')
+        //             ->distinct()
+        //             ->select('state')->get();
 
         return response()->json($states);    
     }
 
-    function fetchCities($state)
+    function fetchCities($services, $state)
     {
         $cities  =  DB::table('locations')
                     ->distinct()
@@ -27,7 +34,7 @@ class BookingsController extends Controller
         return response()->json($cities);    
     }
 
-    function fetchServiceProviders($state, $city)
+    function fetchServiceProviders($services, $state, $city)
     {
         $shopsLocations  =  DB::table('locations')
                             ->where([

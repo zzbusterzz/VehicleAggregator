@@ -167,10 +167,10 @@
     $("#bookform_container").hide(); //Hide description form
 
     $(document.body).on('change',"#Service",function (e) {
-       
+        var service_id          = $("#Service").val();
         $.ajax({
             type:"get",
-            url:'/getStates',
+            url:'/getStates/' + service_id,
             success:function(res)
             {
                 if(res)
@@ -188,11 +188,12 @@
     });
 
     $(document.body).on('change',"#state",function (e) {
-        var value = $(this).val();
-        if(value != " " && value != "Select State"){
+        var service_id = $("#Service").val();
+        var state = $(this).val();
+        if(state != " " && state != "Select State"){
             $.ajax({
                 type:"get",
-                url:'/getCities/'+ value,
+                url:'/getCities/'+ service_id + "/" + state,
                 success:function(res)
                 {       
                     if(res)
@@ -219,13 +220,14 @@
     });
 
     $(document.body).on('change',"#city",function (e) {
+        var service_id = $("#Service").val();
         var state = $("#state").val();
         var city = $(this).val();
 
         if(city != " " && city != "Select Cityr"){
             $.ajax({
                 type:"get",
-                url:'/getLocations/'+ state + "/" + city,
+                url:'/getLocations/'+ service_id + "/" + state + "/" + city,
                 success:function(res)
                 {       
                     if(res)

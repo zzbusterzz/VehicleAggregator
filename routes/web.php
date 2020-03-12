@@ -32,9 +32,9 @@ Route::post('/type', 'TypeController@login')->name('accountType');
 
 Route::view('/dashboard', 'dashboard');
 
-Route::get('/getStates','BookingsController@fetchStates');
-Route::get('/getCities/{state}','BookingsController@fetchCities');
-Route::get('/getLocations/{state}/{cities}','BookingsController@fetchServiceProviders');
+Route::get('/getStates/{service}','BookingsController@fetchStates');
+Route::get('/getCities/{service}/{state}','BookingsController@fetchCities');
+Route::get('/getLocations/{service}/{state}/{cities}','BookingsController@fetchServiceProviders');
 
 Route::get('/getBrandnames','BookingsController@fetchBrands');
 Route::get('/getBrandmodels/{brandName}','BookingsController@fetchModels');

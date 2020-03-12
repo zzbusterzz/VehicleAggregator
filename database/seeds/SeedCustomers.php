@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+use Faker\Factory as Faker;
+
 class SeedCustomers extends Seeder
 {
     /**
@@ -14,10 +16,16 @@ class SeedCustomers extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
+        $faker = Faker::create();
+        foreach (range(1,10) as $index) {
+            DB::table('customers')->insert([
+                'username' => $faker->userName,
+                'firstname' => $faker->firstName,
+                'lastname' => $faker->lastName,                
+                'password' => $faker->password, //bcrypt('secret'),                
+                'phone' => $faker->phoneNumber,
+                'email' => $faker->email,
+            ]);
+        }
     }
 }
