@@ -37,7 +37,9 @@
             <form method="post" action="{{url('customer')}}">
                 {{csrf_field()}}
                 <div class="form-group">
+                    <h6 style="color:blue;">Select User Type</h6>
                     <select id="usertype" name="usertype" class="form-control">
+                        <option value="" disabled selected>Select User Type</option>
                         <option value="cust">Customer</option>
                         <option value="sp">Service Provider</option>
                         <option value="vendor">Parts Vendor</option>
@@ -45,31 +47,36 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="firstname" class="form-control" placeholder="Enter First Name :" />
+                    <h6 style="color:blue;">Enter First Name : </h6>
+                    <input type="text" name="firstname" class="form-control" placeholder="First Name :" />
                 </div>
 
                 <div class="form-group">
+                    <h6 style="color:blue;">Enter Last Name : </h6>
                     <input type="text" name="lastname" class="form-control" placeholder="Enter Last Name :" />
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="Enter Username :" />
-                    <input type="text" name="type"/>
+                    <input type="text" name="username" class="form-control" placeholder="Enter Username :" /> <input type="text" name="type" class="form-control" placeholder="_cus"/>
                 </div>
 
                 <div class="form-group">
+                    <h6 style="color:blue;">Enter Password : </h6>
                     <input type="password" name="password" class="form-control" placeholder="Enter Password :" />
                 </div>
 
                 <div class="form-group">
-                    <input type="password" name="confirmpass" class="form-control" placeholder="Re-Enter Password :" />
+                    <h6 style="color:blue;">Re-Enter Password </h6>
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="Re-Enter Password :" />
                 </div>
 
                 <div class="form-group">
+                    <h6 style="color:blue;">Enter Phone Number : </h6>
                     <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number :" maxlength = "10" />
                 </div>
 
                 <div class="form-group">
+                    <h6 style="color:blue;">Enter Email : </h6>
                     <input type="text" name="email" class="form-control" placeholder="Enter your email :" />
                 </div>
                 <br>
@@ -77,7 +84,12 @@
                     <input type="submit" name="submit" value="Register" class="btn btn-primary"/>
                 </div>
 
+
+
                 </form>
+                <div class="form-group">
+                    <a href="{{ route('login') }}"><input type="submit" name="submit" value="Login" class="btn btn-primary"/></a>
+                </div>
         </div>
 </div>
 @endsection

@@ -47,6 +47,12 @@ Route::get('/type', function () {
 Route::get('/admin', function () {
     return view('login/adminLogin');
 });
+
+
 Route::post('/adminSignin', 'AdminController@adminSignin');
 
+
+Route::get('/adminSignin', function () {
+    return view('login/adminLogin');
+});
 
