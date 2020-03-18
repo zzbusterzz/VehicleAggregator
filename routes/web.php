@@ -30,7 +30,7 @@ Route::post('/register', 'CustomerController@login')->name('register');
 Route::view('/type', 'accountType');
 Route::post('/type', 'TypeController@login')->name('accountType');
 
-Route::view('/dashboard', 'dashboard');
+Route::view('/dashboard', 'dashboard')->name('dashboard');;
 
 Route::get('/getStates/{service}','BookingsController@fetchStates');
 Route::get('/getCities/{service}/{state}','BookingsController@fetchCities');

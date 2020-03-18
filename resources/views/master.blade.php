@@ -9,7 +9,8 @@
         @stack('head')
     </head>
     <body>
-        <div class="container">
+        <div id="container" class="container">
+            @include('flash-message-board')
             @yield('content')
         </div>
     </body>

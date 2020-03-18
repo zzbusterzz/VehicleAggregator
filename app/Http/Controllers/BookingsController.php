@@ -138,10 +138,7 @@ class BookingsController extends Controller
                                     $appointment_date, $appointment_time, $booking_date, $booking_time, $vehicleno, $yearofmfc, 'Pending']);
 
         if($checkInsert){
-            echo 'Query was successfull';
-            return redirect()->route('dashboard')->with('success', 'Data Added');
+           return redirect()->back()->with('success','Booked service successfully!');
         }
-        else
-            echo 'There was some error';
     }
 }

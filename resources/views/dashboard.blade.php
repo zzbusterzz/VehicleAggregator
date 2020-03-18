@@ -4,10 +4,7 @@
 
 @section('content')
 
-    @prepend('scripts')
-    <!-- Scripts -->
-    <script src="{{ asset('js/BookingsScripts.js')}}"></script>
-    @endprepend
+  
 
     <head>
         <meta charset="UTF-8">
@@ -29,6 +26,7 @@
     </head>
 
     <body id="main_body">
+
         <b>Dashboard</b>
 
         <div id="form_container">
@@ -389,9 +387,12 @@
 
         var appointment_time ;
         var hrs = $("#HH").val();
-        hrs = parseInt(hrs) + 12 ;
+
         if($ampm == "PM")
-            appointment_time    = hrs  + ":" + $("#MM").val() + ":00";
+            hrs = parseInt(hrs) + 12 ;
+
+        appointment_time    = hrs  + ":" + $("#MM").val() + ":00";
+        console.log( "APT Time " + appointment_time);
 
         var today = new Date();
         var booking_date        = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -410,7 +411,16 @@
             },
 
             success:function(data){
-                alert(data.success);
+                alert("added successfully" + data);
+                
+               // location..reload();
+                var newData = $("#success" , data)
+                alert(newData);
+               // $( "#container" ).html( newData );
+             //   $( "#container" ).html()
+                //var newData = $(data).find("#container").html();
+                //alert(newData);
+                //$( "#container" ).html( newData );
             }
         });
     });
