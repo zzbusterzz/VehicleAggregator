@@ -106,12 +106,13 @@ class LoginController extends Controller
 
             $req->session()->put('user_id', $id);
             $req->session()->put('user_name', $username);
-            return redirect('dashboard');
+
+            //Redirect here based on customer,vendor,ServivceProvider
+            return redirect('customerdashboard');//default return is customer dashboard            
+            //return redirect('vendordashboard');//redirect to vendor dashboard
+            //return redirect('spdashboard');//redirect to SP dashboard
         } else{
             echo "Login Failed";
         }
-
-
-        //redirect()->route('customer.create');
     }
 }

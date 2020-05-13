@@ -30,7 +30,12 @@ Route::post('/register', 'CustomerController@login')->name('register');
 Route::view('/type', 'accountType');
 Route::post('/type', 'TypeController@login')->name('accountType');
 
-Route::view('/dashboard', 'dashboard')->name('dashboard');;
+Route::view('customerdashboard', 'customer.dashboard')->name('customerdashboard');
+Route::view('customerbookservice', 'customer.bookservice')->name('customerbookservice');
+Route::view('customershowbookings', 'customer.showcompletedbookings')->name('customershowbookings');
+
+Route::view('vendordashboard', 'vendor.dashboard')->name('vendordashboard');
+Route::view('spdashboard', 'serviceprovider.dashboard')->name('spdashboard');
 
 Route::get('/getStates/{service}','BookingsController@fetchStates');
 Route::get('/getCities/{service}/{state}','BookingsController@fetchCities');
