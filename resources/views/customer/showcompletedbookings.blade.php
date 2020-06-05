@@ -9,11 +9,12 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
     </head>
 
-    <body id="main_body" >       
+    <body id="main_body" >
         @section('navbarButtons')
         {{-- https://stackoverflow.com/questions/38709886/call-route-from-button-click-laravel --}}
         <li><a href="{{ route('customerdashboard') }}">Dashboard</a></li>{{-- Dashboard will show ongoing bookings --}}
-        <li><a href="{{ route('customerbookservice') }}">Book A service</a></li>
+        <li><a href="{{ route('customerbookservice') }}">Book a Service</a></li>
+        <li><a href="{{ route('customerbookservice') }}">Ongoing Bookings</a></li>
         <li class="active"><a href="{{ route('customershowbookings') }}">Completed Requests</a></li>
         @endsection
 
