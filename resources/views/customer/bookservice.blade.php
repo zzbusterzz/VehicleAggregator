@@ -21,11 +21,10 @@
         @endsection
 
         <div class="container" style="margin-top:50px">
-            <b>Dashboard</b>
 
             <div id="form_container">
                 <form id="form_100455" class="appnitro">
-                    <label>Choose the service which you require available in above location : </label>
+                    <label>Select a location where you want to avail the service. </label>
 
                     <div>
                         <select name="Service" id="Service">
@@ -49,7 +48,7 @@
 
                     <div class="form-group">
                         <select name="ServiceProviders" id="ServiceProviders" >
-                            <option value="">Pick a provider</option>
+                            <option value="">Pick a provider from mentioned location.</option>
                         </select>
                     </div>
 
@@ -57,7 +56,7 @@
                 <div id="descp">
                     <ul >
                         <li id="li_1" >
-                            <label>Shop Detaillls </label>
+                            <label>Shop Details </label>
 
                                 <div>
                                     <label >Shop Name</label>
@@ -142,7 +141,7 @@
                             </div>
                         </li>
                         <li id="li_3">
-                            <label class="description" for="yrofmfg">Year of Mfg </label>
+                            <label class="description" for="yrofmfg">Year of Manufacture </label>
                             <div>
                                 <input id="yrofmfg" name="yrofmfg" class="element text medium" type="text" maxlength="255" value="" />
                             </div>

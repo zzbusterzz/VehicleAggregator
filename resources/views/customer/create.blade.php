@@ -75,6 +75,12 @@
                     <h6 style="color:blue;">Enter Email : </h6>
                     <input type="text" name="email" class="form-control" placeholder="Enter your email :" />
                 </div>
+
+                <div>
+                    <h6 style="color:blue;">Upload Profile Picture</h6>
+                    <h6> <input type="file" name="cdp" id="cdp"></h6>
+                </div>
+
                 <br>
                 <div class="form-group">
                     <input type="submit" name="submit" value="Register" class="btn btn-primary"/>

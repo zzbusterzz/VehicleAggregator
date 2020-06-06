@@ -77,7 +77,7 @@
                 </div>
                 <div>
                     <h6 style="color:blue;">Upload Profile Picture</h6>
-                    <h6> <input type="file" name="spdp" id="spdp"></h6>
+                    <h6> <input type="file" name="vdp" id="vdp"></h6>
                 </div>
                 <div>
                     <h6 style="color:blue;">Select document to upload :</h6>
