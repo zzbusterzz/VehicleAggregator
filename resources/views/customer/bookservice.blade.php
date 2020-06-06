@@ -17,7 +17,6 @@
         {{-- https://stackoverflow.com/questions/38709886/call-route-from-button-click-laravel --}}
         <li><a href="{{ route('customerdashboard') }}">Dashboard</a></li>{{-- Dashboard will show ongoing bookings --}}
         <li class="active"><a href="{{ route('customerbookservice') }}">Book a Service</a></li>
-        <li><a href="{{ route('customerbookservice') }}">Ongoing Bookings</a></li>
         <li><a href="{{ route('customershowbookings') }}">Completed Requests</a></li>
         @endsection
 
