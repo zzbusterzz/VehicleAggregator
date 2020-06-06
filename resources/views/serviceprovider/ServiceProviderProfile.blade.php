@@ -47,7 +47,7 @@
             <a href="">Edit Email</a>
         </div>
         <div>
-            <a href="{{ route('CustomerChangePassword') }}">Change Password</a>
+            <a href="{{ route('ServiceProviderChangePassword') }}">Change Password</a>
         </div>
     </body>
 @endsection
