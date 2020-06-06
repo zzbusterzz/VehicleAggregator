@@ -26,6 +26,9 @@ Route::resource('customer', 'CustomerController');
 Route::view('/register', 'customer.create');
 Route::post('/register', 'CustomerController@login')->name('register');
 
+Route::view('/spregister', 'serviceprovider.ServiceProviderRegister');
+
+Route::view('/vendorRegister', 'vendor.VendorRegister');
 
 Route::view('/type', 'accountType');
 Route::post('/type', 'TypeController@login')->name('accountType');

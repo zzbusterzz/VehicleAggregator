@@ -29,7 +29,7 @@
             </ul>
         </div>
         @endif
-      
+
             <form method="post" action="{{url('customer')}}">
                 {{csrf_field()}}
                 <div class="form-group">
