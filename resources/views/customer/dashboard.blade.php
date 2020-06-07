@@ -20,6 +20,20 @@
 
         <div class="container" style="margin-top:50px">
             <b>Dashboard</b>
+
+            <table class="table table-sm table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
         </div>
     </body>
 @endsection
