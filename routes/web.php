@@ -26,16 +26,30 @@ Route::resource('customer', 'CustomerController');
 Route::view('/register', 'customer.create');
 Route::post('/register', 'CustomerController@login')->name('register');
 
-
 Route::view('/type', 'accountType');
 Route::post('/type', 'TypeController@login')->name('accountType');
+
 
 Route::view('customerdashboard', 'customer.dashboard')->name('customerdashboard');
 Route::view('customerbookservice', 'customer.bookservice')->name('customerbookservice');
 Route::view('customershowbookings', 'customer.showcompletedbookings')->name('customershowbookings');
+Route::view('CustomerProfile', 'customer.CustomerProfile');
+Route::view('CustomerChangePassword', 'customer.CustomerChangePassword')->name('CustomerChangePassword');
+
 
 Route::view('vendordashboard', 'vendor.dashboard')->name('vendordashboard');
+Route::view('/vendorRegister', 'vendor.VendorRegister');
+Route::view('VendorProfile', 'vendor.VendorProfile');
+Route::view('VendorChangePassword', 'vendor.VendorChangePassword')->name('VendorChangePassword');
+
+
 Route::view('spdashboard', 'serviceprovider.dashboard')->name('spdashboard');
+Route::view('/spregister', 'serviceprovider.ServiceProviderRegister');
+Route::view('ServiceProviderProfile', 'serviceprovider.ServiceProviderProfile');
+Route::view('ServiceProviderChangePassword', 'serviceprovider.ServiceProviderChangePassword')->name('ServiceProviderChangePassword');
+
+
+
 
 Route::get('/getStates/{service}','BookingsController@fetchStates');
 Route::get('/getCities/{service}/{state}','BookingsController@fetchCities');

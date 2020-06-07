@@ -75,18 +75,19 @@
                     <h6 style="color:blue;">Enter Email : </h6>
                     <input type="text" name="email" class="form-control" placeholder="Enter your email :" />
                 </div>
-
                 <div>
                     <h6 style="color:blue;">Upload Profile Picture</h6>
-                    <h6> <input type="file" name="cdp" id="cdp"></h6>
+                    <h6> <input type="file" name="vdp" id="vdp"></h6>
                 </div>
-
+                <div>
+                    <h6 style="color:blue;">Select document to upload :</h6>
+                    <h6 style="color:blue;">Shop License / Aadhar Card / ID Proof</h6>
+                    <h6><input type="file" name="fileToUpload" id="fileToUpload"></h6>
+                </div>
                 <br>
                 <div class="form-group">
                     <input type="submit" name="submit" value="Register" class="btn btn-primary"/>
                 </div>
-
-
 
                 </form>
                 <div class="form-group">
