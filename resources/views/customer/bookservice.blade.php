@@ -9,6 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     </head>
 
     <body id="main_body" >
@@ -21,19 +22,36 @@
         @endsection
 
         <div class="container" style="margin-top:50px">
+            <h5><b>Instructions</b></h5>
+            <ol>
+                <li>Select the type of service which you require from the drop down box below.</li>
+                <li>Available locations will be provided to you where the service of your choosing is available.</li>
+                <li>Select State and City from the options. Which will further provide you with the authorised service provider available in that area.</li>
+                <li>Select a Service Provider.</li>
+                <li>Based on your choosing you will be able to choose an appointment time by providing Vehicle details.</li>
+                <li>Click Submit and wait for the Provider to contact you!</li>
+            </ol>
+        </div>
+
+        <div class="container" style="margin-top:30px">
 
             <div id="form_container">
                 <form id="form_100455" class="appnitro">
-                    <label>Select a location where you want to avail the service. </label>
-
+                    <label>Select a Service which you require. </label>
+                    <br>
+                    <br>
                     <div>
                         <select name="Service" id="Service">
                             @foreach($services as $service)
                             <option value="{{ $service->id }}">{{ $service->name }}</option>
                             @endforeach
                         </select>
-                    </div>
 
+                    </div>
+                    <br>
+                    <label>Select a location where you want to avail the service. </label>
+                    <br>
+                    <br>
                     <div class="form-group">
                         <select name="state" id="state">
                             <option value="">Select State</option>

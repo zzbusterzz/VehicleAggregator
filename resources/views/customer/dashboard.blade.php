@@ -15,10 +15,13 @@
                 display: block;
             }
             .table td {
-                text-align: center;   
+                text-align: center;
             }
             .table th {
-                text-align: center;   
+                text-align: center;
+            }
+            .display-none {
+                display: none;
             }
         </style>
     </head>
@@ -33,11 +36,15 @@
         @endsection
 
         <div style="margin-top:50px">
-        <b>Dashboard</b>
+        <h4><b>Welcome to WheelWorks <i>@username</i>!<b></h4>
+        <p>This is your dashboard.<br>Here you can see your onoing booking.<br>Click the button below to check your bookings.</p>
         </div>
+<br>
+        <input id="show" type="submit" name="submit" value="SHOW ONGOING REQUESTS" class="btn btn-primary"/>
 
-        <div class="table-wrapper-scroll-y my-custom-scrollbar " style="margin-top:10px">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar display-none" style="margin-top:10px" id="placeholder">
 
+            <input id="hide" type="submit" name="submit" value="HIDE ONGOING REQUESTS" class="btn btn-primary"/>
 
             {{-- <table class="table  table-wrapper-scroll-y my-custom-scrollbar table-hover"> --}}
                 <table class="table table-striped mb-0 table-hover">
@@ -59,7 +66,7 @@
                     @foreach($data as $val)
                     <?php $i++ ?>
                     <tr class='clickable-row'>
-                        {{-- Get service id for displalying bookings 
+                        {{-- Get service id for displalying bookings
                             get vehiclebrand id for displaying car type
                             get location id for displlaying loc
                             --}}
@@ -97,6 +104,7 @@
                 </div>
             </div>
         </div>
+
     </body>
 
 
@@ -104,5 +112,14 @@
         $(".clickable-row").click(function() {
             $("#myModal").modal();
         });
+
+        $("#hide").click(function(){
+        $("[id^='placeholder']").hide();
+        });
+
+        $("#show").click(function(){
+        //$("[id^='placeholder']").hide();
+        $("#placeholder").show();
+        }); //https://stackoverflow.com/questions/31826469/how-to-display-a-div-only-when-a-button-is-clicked
     </script>
 @endsection
