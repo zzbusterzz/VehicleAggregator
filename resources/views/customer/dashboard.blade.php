@@ -37,7 +37,7 @@
 
         <div style="margin-top:50px">
         <h4><b>Welcome to WheelWorks <i>@username</i>!<b></h4>
-        <p>This is your dashboard.<br>Here you can see your onoing booking.<br>Click the button below to check your bookings.</p>
+        <p>This is your dashboard.<br>Here you can see your ongoing booking.<br>Click the button below to check your bookings.</p>
         </div>
 <br>
         <input id="show" type="submit" name="submit" value="SHOW ONGOING REQUESTS" class="btn btn-primary"/>
