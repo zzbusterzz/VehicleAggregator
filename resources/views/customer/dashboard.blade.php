@@ -1,5 +1,3 @@
-@php( $services = \App\Service::all())
-
 @extends('master')
 
 @section('content')
@@ -7,6 +5,22 @@
     <head>
         @extends('layout.header');
         <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <style type="text/css">
+            .my-custom-scrollbar {
+                position: relative;
+                height: 300px;
+                overflow: auto;
+            }
+            .table-wrapper-scroll-y {
+                display: block;
+            }
+            .table td {
+                text-align: center;   
+            }
+            .table th {
+                text-align: center;   
+            }
+        </style>
     </head>
 
     <body id="main_body">
@@ -18,22 +32,77 @@
         <li><a href="{{ route('customershowbookings') }}">Completed Requests</a></li>
         @endsection
 
-        <div class="container" style="margin-top:50px">
-            <b>Dashboard</b>
+        <div style="margin-top:50px">
+        <b>Dashboard</b>
+        </div>
 
-            <table class="table table-sm table-dark">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar " style="margin-top:10px">
+
+
+            {{-- <table class="table  table-wrapper-scroll-y my-custom-scrollbar table-hover"> --}}
+                <table class="table table-striped mb-0 table-hover">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Service Provider ID</th>
+                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                    
+                    {{-- https://stackoverflow.com/questions/49768361/laravel-increment-id --}}
+                    @php
+                        $i = 0;
+                    @endphp
+
+                    @php( $data = \App\Requests::all())
+
+                    @foreach($data as $val)
+                    <?php $i++ ?>
+                    <tr class='clickable-row'>
+                        {{-- Get service id for displalying bookings 
+                            get vehiclebrand id for displaying car type
+                            get location id for displlaying loc
+                            --}}
+                        <th scope="row">{{ $i}}</th>
+                        <td>{{ $val->serviceprovider_id }}</td>
+                        <td>{{ $val->status }}</td>
+                    </tr>
+
+                    @endforeach
                 </tbody>
             </table>
+
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Modal body..
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
+
+
+    <script type="text/javascript">
+        $(".clickable-row").click(function() {
+            $("#myModal").modal();
+        });
+    </script>
 @endsection
