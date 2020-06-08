@@ -103,8 +103,8 @@ class LoginController extends Controller
         ]);
 
         $username = $req->input('username');
-        
-        
+
+
         if (strpos($username, 'cus_') === 0) {
             $checkLogin = DB::table('customers')->where(['username'=>str_replace("cus_","",$username)])->get();
             $userType = 0;
@@ -115,9 +115,6 @@ class LoginController extends Controller
             $checkLogin = DB::table('vendors')->where(['username'=>str_replace("ven_","",$username)])->get();
             $userType = 2;
         }
-
-
-       
 
         if (Hash::check($req->input('password'), $checkLogin->first()->password))
         {
