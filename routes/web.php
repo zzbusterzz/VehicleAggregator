@@ -23,7 +23,7 @@ Route::post('/login', 'LoginController@login')->name('login');
 
 Route::resource('customer', 'CustomerController');
 
-Route::view('/register', 'customer.create');
+Route::view('/register', 'customer.register');
 Route::post('/register', 'CustomerController@login')->name('register');
 
 Route::view('/type', 'accountType');
@@ -33,6 +33,8 @@ Route::post('/type', 'TypeController@login')->name('accountType');
 Route::view('customerdashboard', 'customer.dashboard')->name('customerdashboard');
 Route::view('customerbookservice', 'customer.bookservice')->name('customerbookservice');
 Route::view('customershowbookings', 'customer.showcompletedbookings')->name('customershowbookings');
+Route::view('customerplaceorder', 'customer.placeorder')->name('customerplaceorder');
+
 Route::view('CustomerProfile', 'customer.CustomerProfile');
 Route::view('CustomerChangePassword', 'customer.CustomerChangePassword')->name('CustomerChangePassword');
 

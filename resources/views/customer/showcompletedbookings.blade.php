@@ -32,6 +32,7 @@
         <li><a href="{{ route('customerdashboard') }}">Dashboard</a></li>{{-- Dashboard will show ongoing bookings --}}
         <li><a href="{{ route('customerbookservice') }}">Book a Service</a></li>
         <li class="active"><a href="{{ route('customershowbookings') }}">Completed Requests</a></li>
+        <li><a href="{{ route('customerplaceorder') }}">Order Part</a></li>
         @endsection
 
         <div style="margin-top:50px">
@@ -260,21 +261,7 @@
                             $(".modal-body #sProvider").val(res[0].shopname );
                         }
                     }
-                });
-    
-    
-                // $.ajax({
-                //     type:"get",
-                //     url:'/getServiceOnID/'+ temp.service_id,
-                //     success:function(res)
-                //     {
-                //         if(res)
-                //         {
-                //             $(".modal-body #sType").val(res[0].name );
-                //         }
-                //     }
-                // });
-    
+                });    
     
                 $("#modalDataDisp").modal();
             });

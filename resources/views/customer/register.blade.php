@@ -16,6 +16,7 @@
 </head>
 
 <div class="row">
+
     <div class="col-md-12">
         <h3 aling = "center"> Register Here! <h3>
         <br/>
@@ -35,10 +36,9 @@
                 <div class="form-group">
                     <h6 style="color:blue;">Select User Type</h6>
                     <select id="usertype" name="usertype" class="form-control">
-                        <option value="" disabled selected>Select User Type</option>
-                        <option value="cust">Customer</option>
-                        <option value="sp">Service Provider</option>
-                        <option value="vendor">Parts Vendor</option>
+                        <option value="cus_">Customer</option>
+                        <option value="sp_">Service Provider</option>
+                        <option value="ven_">Parts Vendor</option>
                     </select>
                 </div>
 
@@ -53,7 +53,17 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="Enter Username :" /> <input type="text" name="type" class="form-control" placeholder="_cus"/>
+                    <h6 style="color:blue;">Enter Username : </h6>
+                    <form>
+                        <div class="row">
+                          <div class="col-md-1 ">
+                            <input id="type" type="text" name="type" class="form-control" value="_cus" disabled/>
+                          </div>
+                          <div class="col-md-11">
+                            <input id="username" type="text" name="username" class="form-control" placeholder="Enter Username :" /> 
+                          </div>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="form-group">
@@ -86,12 +96,18 @@
                     <input type="submit" name="submit" value="Register" class="btn btn-primary"/>
                 </div>
 
-
-
                 </form>
                 <div class="form-group">
                     <a href="{{ route('login') }}"><input type="submit" name="submit" value="Login" class="btn btn-primary"/></a>
                 </div>
         </div>
 </div>
+
+
+<script type="text/javascript">
+    $(document.body).on('change',"#usertype",function (e) {     
+        $("#type").val($("#usertype").val());
+    });
+</script>
+
 @endsection
