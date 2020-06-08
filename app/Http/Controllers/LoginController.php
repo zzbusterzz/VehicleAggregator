@@ -86,6 +86,15 @@ class LoginController extends Controller
         //
     }
 
+    public function endsWith($string, $endString)
+    {
+        $len = strlen($endString);
+        if ($len == 0) {
+            return true;
+        }
+        return (substr($string, -$len) === $endString);
+    }
+
     public function login(Request $req) {
 
         $this->validate($req, [
@@ -94,7 +103,7 @@ class LoginController extends Controller
         ]);
 
         $username = $req->input('username');
-        
+
         $checkLogin = DB::table('customers')->where(['username'=>$username])->get();
 
         if (Hash::check($req->input('password'), $checkLogin->first()->password))
@@ -103,14 +112,24 @@ class LoginController extends Controller
             echo "Login Successfull";
             $id = $checkLogin->first()->id;
 
-
             $req->session()->put('user_id', $id);
             $req->session()->put('user_name', $username);
 
             //Redirect here based on customer,vendor,ServivceProvider
-            return redirect('customerdashboard');//default return is customer dashboard            
+            //return redirect('customerdashboard');//default return is customer dashboard
             //return redirect('vendordashboard');//redirect to vendor dashboard
             //return redirect('spdashboard');//redirect to SP dashboard
+
+
+            //endsWith function is above logiin function
+            if(endsWith($username, "_cus")){
+                return redirect('customerdashboard');
+            } else if(endsWith($username, "_sp")){
+                return redirect('spdashboard');
+            } else if(endsWith($username, "_ven")){
+                return redirect('vendordashboard');
+            }
+
         } else{
             echo "Login Failed";
         }
