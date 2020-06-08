@@ -17,7 +17,7 @@
 
 <div class="row">
 
-    <div class="col-md-12">
+    <div class="col-md-12  " >
         <h3 aling = "center"> Register Here! <h3>
         <br/>
         @if(count($errors) > 0)
@@ -33,73 +33,96 @@
 
             <form method="post" action="{{url('customer')}}">
                 {{csrf_field()}}
-                <div class="form-group">
-                    <h6 style="color:blue;">Select User Type</h6>
-                    <select id="usertype" name="usertype" class="form-control">
-                        <option value="cus_">Customer</option>
-                        <option value="sp_">Service Provider</option>
-                        <option value="ven_">Parts Vendor</option>
-                    </select>
-                </div>
+                    <div>
+                        <h6 style="color:blue;">Select User Type</h6>
+                        <select  id="usertype" name="usertype" class="form-control">
+                            <option value="cus_">Customer</option>
+                            <option value="sp_">Service Provider</option>
+                            <option value="ven_">Parts Vendor</option>
+                        </select>
+                    </div>
+
+                <form>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                            <h6 style="color:blue;">First Name : </h6>
+                            <input type="text" name="firstname" class="form-control" placeholder="First Name :" />
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                            <h6 style="color:blue;">Last Name : </h6>
+                            <input type="text" name="lastname" class="form-control" placeholder="Enter Last Name :" />
+                        </div>
+                      </div>
+                    </div>
+                </form>
 
                 <div class="form-group">
-                    <h6 style="color:blue;">Enter First Name : </h6>
-                    <input type="text" name="firstname" class="form-control" placeholder="First Name :" />
-                </div>
-
-                <div class="form-group">
-                    <h6 style="color:blue;">Enter Last Name : </h6>
-                    <input type="text" name="lastname" class="form-control" placeholder="Enter Last Name :" />
-                </div>
-
-                <div class="form-group">
-                    <h6 style="color:blue;">Enter Username : </h6>
+                    <h6 style="color:blue;">Username : </h6>
                     <form>
                         <div class="row">
                           <div class="col-md-1 ">
                             <input id="type" type="text" name="type" class="form-control" value="_cus" disabled/>
                           </div>
-                          <div class="col-md-11">
-                            <input id="username" type="text" name="username" class="form-control" placeholder="Enter Username :" /> 
+                          <div class="col-md-5">
+                            <input id="username" type="text" name="username" class="form-control" placeholder="Username :" /> 
                           </div>
                         </div>
                     </form>
                 </div>
 
-                <div class="form-group">
-                    <h6 style="color:blue;">Enter Password : </h6>
-                    <input type="password" name="password" class="form-control" placeholder="Enter Password :" />
-                </div>
 
-                <div class="form-group">
-                    <h6 style="color:blue;">Re-Enter Password </h6>
-                    <input type="password" name="password_confirmation" class="form-control" placeholder="Re-Enter Password :" />
-                </div>
+                <form>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="form-group">
+                            <h6 style="color:blue;">Enter Password : </h6>
+                            <input type="password" name="password" class="form-control" placeholder="Enter Password :" />
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                            <h6 style="color:blue;">Re-Enter Password </h6>
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="Re-Enter Password :" />
+                        </div>
+                      </div>
+                    </div>
+                </form>
 
-                <div class="form-group">
-                    <h6 style="color:blue;">Enter Phone Number : </h6>
-                    <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number :" maxlength = "10" />
-                </div>
-
-                <div class="form-group">
-                    <h6 style="color:blue;">Enter Email : </h6>
-                    <input type="text" name="email" class="form-control" placeholder="Enter your email :" />
-                </div>
-
+                <form>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                            <h6 style="color:blue;">Enter Phone Number : </h6>
+                            <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number :" maxlength = "10" />
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                            <h6 style="color:blue;">Enter Email : </h6>
+                            <input type="text" name="email" class="form-control" placeholder="Enter your email :" />
+                        </div>
+                      </div>
+                    </div>
+                </form>
+                
                 <div>
                     <h6 style="color:blue;">Upload Profile Picture</h6>
                     <h6> <input type="file" name="cdp" id="cdp"></h6>
                 </div>
 
                 <br>
+
                 <div class="form-group">
                     <input type="submit" name="submit" value="Register" class="btn btn-primary"/>
                 </div>
-
-                </form>
+                    
                 <div class="form-group">
-                    <a href="{{ route('login') }}"><input type="submit" name="submit" value="Login" class="btn btn-primary"/></a>
+                    <input type="submit" name="submit" value="Login" class="btn btn-primary"/>
                 </div>
+            </form>
         </div>
 </div>
 
