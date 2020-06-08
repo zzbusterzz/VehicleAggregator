@@ -34,7 +34,6 @@ Route::view('customerdashboard', 'customer.dashboard')->name('customerdashboard'
 Route::view('customerbookservice', 'customer.bookservice')->name('customerbookservice');
 Route::view('customershowbookings', 'customer.showcompletedbookings')->name('customershowbookings');
 Route::view('customerplaceorder', 'customer.placeorder')->name('customerplaceorder');
-
 Route::view('CustomerProfile', 'customer.CustomerProfile');
 Route::view('CustomerChangePassword', 'customer.CustomerChangePassword')->name('CustomerChangePassword');
 
@@ -50,7 +49,8 @@ Route::view('/spregister', 'serviceprovider.ServiceProviderRegister');
 Route::view('ServiceProviderProfile', 'serviceprovider.ServiceProviderProfile');
 Route::view('ServiceProviderChangePassword', 'serviceprovider.ServiceProviderChangePassword')->name('ServiceProviderChangePassword');
 
-
+Route::view('PendingRequests', 'serviceprovider.PendingRequests')->name('PendingRequests');
+Route::view('CompletedRequests', 'serviceprovider.CompletedRequests')->name('CompletedRequests');
 
 
 Route::get('/getStates/{service}','BookingsController@fetchStates');

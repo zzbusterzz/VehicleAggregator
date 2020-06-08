@@ -100,7 +100,7 @@
         <li class="active"><a href="{{ route('customerplaceorder') }}">Order Part</a></li>
         @endsection
 
-        <div class="container" style="margin-top:50px">
+        <div class="container" style="margin-top:50px"> {{--https://medium.com/justlaravel/search-functionality-in-laravel-a2527282150b--}}
             <label>Search Parts</label>
             <form action="/search" method="POST" role="search">
                 {{ csrf_field() }}
@@ -127,7 +127,7 @@
                 </div>
                 <div class="modal-body">
 
-            <div id="myBtnContainer">
+            <div id="myBtnContainer"> {{-- https://www.w3schools.com/howto/howto_js_filter_elements.asp --}}
             <button class="btn" onclick="filterSelection('Brand')"> Brand</button>
             <button class="btn" onclick="filterSelection('Model')"> Model</button>
             </div>
