@@ -82,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Vehicle Services
+                    🎡 Wheel Works!
                 </div>
             </div>
         </div>

@@ -7,9 +7,11 @@
     <head>
         @extends('layout.header');
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
 
     <body id="main_body" >
@@ -23,17 +25,21 @@
 
         <div class="container" style="margin-top:50px">
             <h5><b>Instructions</b></h5>
+            <div class="panel panel-default">
             <ol>
+                <br>
                 <li>Select the type of service which you require from the drop down box below.</li>
                 <li>Available locations will be provided to you where the service of your choosing is available.</li>
                 <li>Select State and City from the options. Which will further provide you with the authorised service provider available in that area.</li>
                 <li>Select a Service Provider.</li>
                 <li>Based on your choosing you will be able to choose an appointment time by providing Vehicle details.</li>
                 <li>Click Submit and wait for the Provider to contact you!</li>
+                <br>
             </ol>
+            </div>
         </div>
 
-        <div class="container" style="margin-top:30px">
+        <div class="container" style="margin-top:10px">
 
             <div id="form_container">
                 <form id="form_100455" class="appnitro">
