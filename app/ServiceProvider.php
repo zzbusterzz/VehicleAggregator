@@ -8,4 +8,6 @@ class ServiceProvider extends Model
 {
     //
     public $timestamps = false;
+    protected $fillable = ['username','firstname','lastname','password','phone','email'];
+
 }

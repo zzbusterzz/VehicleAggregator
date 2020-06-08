@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Customer;
+use App\ServiceProvider;
+use App\Vendor;
 //use DB;
 
 
@@ -27,7 +29,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customer.create');
+        return view('customer.register');
     }
 
     /**
@@ -54,25 +56,40 @@ class CustomerController extends Controller
         //$output->writeln($password);
         echo $password ;
 
-        $customers = new Customer([
-            'username' => $request->get('username'),
-            'firstname' => $request->get('firstname'),
-            'lastname' => $request->get('lastname'),
-            'password' => $password,
-            'phone' => $request->get('phone'),
-            'email' => $request->get('email'),
-        ]);
-        $customers->save();
-
-        // $username = $request->get('username');
-        // $firstname = $request->get('firstname');
-        // $lastname = $request->get('lastname');
-        // $password = $request->get('confirmpass');
-        // $phone = $request->get('phone');
-        // $email = $request->get('email');
-
-        // DB::insert('insert into customers  (id, username, firstname, lastname, password, phone, email)
-        //                             values (?, ?, ?, ?, ?, ?, ?)', [null, $username, $firstname, $lastname, $password, $phone, $email]);
+        if($request->get('usertype') == "cus_"){
+            $customers = new Customer([
+                'username' => $request->get('username'),
+                'firstname' => $request->get('firstname'),
+                'lastname' => $request->get('lastname'),
+                'password' => $password,
+                'phone' => $request->get('phone'),
+                'email' => $request->get('email'),
+            ]);
+            
+            
+            $customers->save();
+        } elseif($request->get('usertype') == "sp_" ){
+            $customers = new ServiceProvider([
+                'username' => $request->get('username'),
+                'firstname' => $request->get('firstname'),
+                'lastname' => $request->get('lastname'),
+                'password' => $password,
+                'phone' => $request->get('phone'),
+                'email' => $request->get('email'),
+            ]);
+            $customers->save();
+        } elseif($request->get('usertype') == "ven_" ){
+            $customers = new Vendor([
+                'username' => $request->get('username'),
+                'firstname' => $request->get('firstname'),
+                'lastname' => $request->get('lastname'),
+                'password' => $password,
+                'phone' => $request->get('phone'),
+                'email' => $request->get('email'),
+            ]);
+            
+            $customers->save();
+        }
 
         return redirect()->route('customer.create')->with('success', 'Registration Complete. Please LOGIN!');
     }

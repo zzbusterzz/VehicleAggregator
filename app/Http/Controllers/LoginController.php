@@ -103,8 +103,21 @@ class LoginController extends Controller
         ]);
 
         $username = $req->input('username');
+        
+        
+        if (strpos($username, 'cus_') === 0) {
+            $checkLogin = DB::table('customers')->where(['username'=>str_replace("cus_","",$username)])->get();
+            $userType = 0;
+        } else if(strpos($username, "sp_") === 0){
+            $checkLogin = DB::table('service_providers')->where(['username'=>str_replace("sp_","",$username)])->get();
+            $userType = 1;
+        } else if(strpos($username, "ven_") === 0){
+            $checkLogin = DB::table('vendors')->where(['username'=>str_replace("ven_","",$username)])->get();
+            $userType = 2;
+        }
 
-        $checkLogin = DB::table('customers')->where(['username'=>$username])->get();
+
+       
 
         if (Hash::check($req->input('password'), $checkLogin->first()->password))
         {
@@ -122,11 +135,19 @@ class LoginController extends Controller
 
 
             //endsWith function is above logiin function
-            if(endsWith($username, "_cus")){
+            // if(beginsWith($username, "cus_")){
+            //     return redirect('customerdashboard');
+            // } else if(endsWith($username, "sp_")){
+            //     return redirect('spdashboard');
+            // } else if(endsWith($username, "ven_")){
+            //     return redirect('vendordashboard');
+            // }
+
+            if($userType == 0){
                 return redirect('customerdashboard');
-            } else if(endsWith($username, "_sp")){
+            } else if($userType == 1){
                 return redirect('spdashboard');
-            } else if(endsWith($username, "_ven")){
+            } else if($userType == 2){
                 return redirect('vendordashboard');
             }
 
