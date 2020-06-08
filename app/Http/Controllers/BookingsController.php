@@ -141,4 +141,31 @@ class BookingsController extends Controller
            return redirect()->back()->with('success','Booked service successfully!');
         }
     }
+
+    function fetchBrandsAndModel($brandID)//Returns brand name and subtype based on id
+    {
+        $brandDet  =  DB::table('vehicles')
+                        ->where([
+                            ['id',$brandID]
+                            ])->get(); 
+        return response()->json($brandDet);
+    }
+
+    function fetchLocationOnID($locID)//Returns brand name and subtype based on id
+    {
+        $locDet  =  DB::table('locations')
+                        ->where([
+                            ['id',$locID]
+                            ])->get(); 
+        return response()->json($locDet);
+    }
+
+    function fetchServiceOnID($servID)//Returns brand name and subtype based on id
+    {
+        $serv  =  DB::table('services')
+                        ->where([
+                            ['id',$servID]
+                            ])->get(); 
+        return response()->json($serv);
+    }
 }

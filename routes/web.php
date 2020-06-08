@@ -58,6 +58,10 @@ Route::get('/getLocations/{service}/{state}/{cities}','BookingsController@fetchS
 Route::get('/getBrandnames','BookingsController@fetchBrands');
 Route::get('/getBrandmodels/{brandName}','BookingsController@fetchModels');
 
+Route::get('/getBrandmodelsAndsub/{brandid}','BookingsController@fetchBrandsAndModel');
+Route::get('/getLocationOnID/{locID}','BookingsController@fetchLocationOnID');
+Route::get('/getServiceOnID/{service_id}','BookingsController@fetchServiceOnID');
+
 
 Route::get('/type', function () {
     return view('userType');
