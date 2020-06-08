@@ -14,9 +14,10 @@ class AdminController extends Controller
         $password = $req->input('password');
 
         $checkLogin = DB::table('administrators')->where(['username'=>$username, 'password'=>$password])->get();
-        if(count ($checkLogin) > 0){
-            echo "Welcome! ".$username;
 
+        if(count ($checkLogin) > 0){
+            $req->session()->put('user_name', $username);
+            return redirect('AdminDashboard');
         }
         else{
             echo "Login Failed";

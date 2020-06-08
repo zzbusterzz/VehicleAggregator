@@ -70,8 +70,11 @@ Route::get('/type', function () {
 });
 
 Route::get('/admin', function () {
-    return view('login/adminLogin');
+    return view('Administrator/AdminLogin');
 });
+Route::view('AdminDashboard', 'Administrator.AdminDashboard')->name('AdminDashboard');
+Route::view('UserData', 'Administrator.UserData')->name('UserData');
+Route::view('Confirmation', 'Administrator.Confirmation')->name('Confirmation');
 
 
 Route::post('/adminSignin', 'AdminController@adminSignin');
