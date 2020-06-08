@@ -50,7 +50,8 @@ Route::view('/spregister', 'serviceprovider.ServiceProviderRegister');
 Route::view('ServiceProviderProfile', 'serviceprovider.ServiceProviderProfile');
 Route::view('ServiceProviderChangePassword', 'serviceprovider.ServiceProviderChangePassword')->name('ServiceProviderChangePassword');
 
-
+Route::view('PendingRequests', 'serviceprovider.PendingRequests')->name('PendingRequests');
+Route::view('CompletedRequests', 'serviceprovider.CompletedRequests')->name('CompletedRequests');
 
 
 Route::get('/getStates/{service}','BookingsController@fetchStates');

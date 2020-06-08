@@ -116,13 +116,11 @@ class LoginController extends Controller
             $userType = 2;
         }
 
-       
 
         if ( !$checkLogin->isEmpty() && Hash::check($req->input('password'),optional($checkLogin)->first()->password))
         {
             // The passwords match...
             echo "Login Successfull";
-
             $req->session()->put('usertype', $utype);
             $req->session()->put('user_id', $checkLogin->first()->id);
             $req->session()->put('user_name', $username);
