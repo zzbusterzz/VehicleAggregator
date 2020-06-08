@@ -103,29 +103,28 @@ class LoginController extends Controller
         ]);
 
         $username = $req->input('username');
+        $utype = $req->input('usertype');
         
-        
-        if (strpos($username, 'cus_') === 0) {
+        if($utype == "cus_") {
             $checkLogin = DB::table('customers')->where(['username'=>str_replace("cus_","",$username)])->get();
             $userType = 0;
-        } else if(strpos($username, "sp_") === 0){
+        } else if($utype == "sp_"){
             $checkLogin = DB::table('service_providers')->where(['username'=>str_replace("sp_","",$username)])->get();
             $userType = 1;
-        } else if(strpos($username, "ven_") === 0){
+        } else if($utype == "ven_"){
             $checkLogin = DB::table('vendors')->where(['username'=>str_replace("ven_","",$username)])->get();
             $userType = 2;
         }
 
-
        
 
-        if (Hash::check($req->input('password'), $checkLogin->first()->password))
+        if ( !$checkLogin->isEmpty() && Hash::check($req->input('password'),optional($checkLogin)->first()->password))
         {
             // The passwords match...
             echo "Login Successfull";
-            $id = $checkLogin->first()->id;
 
-            $req->session()->put('user_id', $id);
+            $req->session()->put('usertype', $utype);
+            $req->session()->put('user_id', $checkLogin->first()->id);
             $req->session()->put('user_name', $username);
 
             //Redirect here based on customer,vendor,ServivceProvider
@@ -143,15 +142,16 @@ class LoginController extends Controller
             //     return redirect('vendordashboard');
             // }
 
-            if($userType == 0){
+            if($utype == "cus_") {
                 return redirect('customerdashboard');
-            } else if($userType == 1){
+            } else if($utype == "sp_"){
                 return redirect('spdashboard');
-            } else if($userType == 2){
+            } else if($utype == "ven_"){
                 return redirect('vendordashboard');
             }
 
         } else{
+            return redirect()->route('login')->with('warning', 'Login Failed. Please Check Username or Password!');
             echo "Login Failed";
         }
     }

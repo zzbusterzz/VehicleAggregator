@@ -35,8 +35,8 @@ Route::view('customerbookservice', 'customer.bookservice')->name('customerbookse
 Route::view('customershowbookings', 'customer.showcompletedbookings')->name('customershowbookings');
 Route::view('customerplaceorder', 'customer.placeorder')->name('customerplaceorder');
 
-Route::view('CustomerProfile', 'customer.CustomerProfile');
-Route::view('CustomerChangePassword', 'customer.CustomerChangePassword')->name('CustomerChangePassword');
+Route::view('customerprofile', 'customer.customerprofile')->name('customerprofile');
+Route::view('customerchangepassword', 'customer.customerchangepassword')->name('customerchangepassword');
 
 
 Route::view('vendordashboard', 'vendor.dashboard')->name('vendordashboard');

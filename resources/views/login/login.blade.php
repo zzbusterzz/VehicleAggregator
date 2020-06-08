@@ -27,6 +27,14 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="form-group">
+            <select id="usertype" name="usertype" class="form-control">
+                <option value="cus_">Customer</option>
+                <option value="sp_">Service Provider</option>
+                <option value="ven_">Parts Vendor</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <input type="text" name="username" required="" class="form-control" placeholder="Enter Username :" />
         </div>
         <div class="form-group">

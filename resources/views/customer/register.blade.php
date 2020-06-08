@@ -19,8 +19,8 @@
     <div class="col-md-12">
         <h3 aling = "center"> Register Here! <h3>
         <br/>
+        
         @if(count($errors) > 0)
-
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
