@@ -29,7 +29,7 @@
     <body id="main_body"  style="height:1500px">
 
         @section('navbarButtons')
-        <li class="active"><a href="spdashboard">Ongoing Requests</a></li>
+        <li class="active"><a href="spdashboard">Dashboard</a></li>
         {{-- Dashboard will show new bookings which user can set status --}}
         <li><a href="{{ route('ongoingrequests') }}">Pending Requests</a></li>
         {{-- ongoingrequests --}}

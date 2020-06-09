@@ -18,10 +18,28 @@
 
         @section('navbarButtons')
         {{-- https://stackoverflow.com/questions/38709886/call-route-from-button-click-laravel --}}
-        <li><a href="{{ route('customerdashboard') }}">Dashboard</a></li>{{-- Dashboard will show ongoing bookings --}}
-        <li><a href="{{ route('customerbookservice') }}">Book a Service</a></li>
-        <li><a href="{{ route('customershowbookings') }}">Completed Requests</a></li>
-        <li><a href="{{ route('customerplaceorder') }}">Order Part</a></li>
+
+        @if(Session::get('usertype') == 'cus_')         
+            <li><a href="{{ route('customerdashboard') }}">Dashboard</a></li>{{-- Dashboard will show ongoing bookings --}}
+            <li><a href="{{ route('customerbookservice') }}">Book a Service</a></li>
+            <li><a href="{{ route('customershowbookings') }}">Completed Requests</a></li>
+            <li><a href="{{ route('customerplaceorder') }}">Order Part</a></li>
+        @elseif(Session::get('usertype') == 'sp_')         
+            <li><a href="spdashboard">Dashboard</a></li>
+            {{-- Dashboard will show new bookings which user can set status --}}
+            <li><a href="{{ route('ongoingrequests') }}">Pending Requests</a></li>
+            {{-- ongoingrequests --}}
+            <li><a href="{{ route('completedrequests') }}">Completed Requests</a></li>
+            {{-- completedrequests --}}
+        @else
+            <li><a href="#">Ongoing Requests</a></li>
+            {{-- Dashboard will show ongoing bookings --}}
+            <li><a href="#">Pending Requests</a></li>
+            <li><a href="#">Completed Requests</a></li>
+            <li><a href="#">Parts Inventory</a></li> {{--To view the stock available and to add or remove stock--}}
+        @endif
+
+        
         @endsection
 
         @php
