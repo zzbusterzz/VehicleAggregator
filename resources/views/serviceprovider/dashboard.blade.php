@@ -28,21 +28,10 @@
 
     <body id="main_body"  style="height:1500px">
 
-        @section('navbarButtons')
-        <li class="active"><a href="spdashboard">Ongoing Requests</a></li>
-        {{-- Dashboard will show new bookings which user can set status --}}
-        <li><a href="{{ route('pendingrequests') }}">Pending Requests</a></li>
-        {{-- ongoingrequests --}}
-        <li><a href="{{ route('completedrequests') }}">Completed Requests</a></li>
-        {{-- completedrequests --}}
-        <li><a href="{{ route('addshop') }}">Add Shop</a></li>
-        @endsection
-
-
         @php
         $i = 0;
             $type = Session::get('usertype');
-
+            $userid = Session::get('user_id');
             $data = \App\Requests::where('serviceprovider_id', Session::get('user_id'))
                         ->where('status', 'Ongoing')
                         ->get();
@@ -50,6 +39,20 @@
                         $services = App\Service::All();
         @endphp
 
+
+        @section('navbarButtons')
+        <li class="active"><a href="spdashboard">Ongoing Requests</a></li>
+        {{-- Dashboard will show new bookings which user can set status --}}
+        <li><a href="{{ route('pendingrequests') }}">Pending Requests</a></li>
+        {{-- ongoingrequests --}}
+        <li><a href="{{ route('completedrequests') }}">Completed Requests</a></li>
+        {{-- completedrequests --}}
+        <li><a href="{{ route('getshoplocations', Session::get('user_id')) }}">Add Shop</a></li>
+        {{-- https://stackoverflow.com/questions/41189695/route-not-defined-error-in-laravel-even-though-route-is-defined --}}
+        @endsection
+
+
+     
         <div class="container" style="margin-top:50px">
 
             <table class="table table-striped mb-0 table-hover">

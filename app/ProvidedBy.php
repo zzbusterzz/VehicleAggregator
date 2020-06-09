@@ -8,4 +8,8 @@ class ProvidedBy extends Model
 {
     //
     public $timestamps = false;
+
+    protected $fillable = [
+        'serviceprovider_id', 'location_id', 'service_id'
+    ];
 }

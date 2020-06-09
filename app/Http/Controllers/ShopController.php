@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Shop;
+use DB;
 
 class ShopController extends Controller
 {
@@ -33,8 +34,26 @@ class ShopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function updatedelrecord(Request $request)
     {
+
+        switch ($request->input('action')) {
+            case 'update':
+                // Save model
+                $test = 0;
+                break;
+    
+            case 'delete':
+                // Preview model
+                $test = 0;
+                break;
+    
+            case 'Add Shop':
+                // Redirect to advanced edit
+                $test = 0;
+                break;
+        }
+
         $this->validate($request, [
             'shopno' => 'required',
             'shopname' => 'required',
@@ -46,8 +65,7 @@ class ShopController extends Controller
             'pincode' => 'required'
         ]);
 
-        $shop = new Shop([
-            'Service' => $request->get('Service'),
+        $shop = new Location([
             'shopno' => $request->get('shopno'),
             'shopname' => $request->get('shopname'),
             'shopphone' => $request->get('shopphone'),
@@ -59,6 +77,29 @@ class ShopController extends Controller
         ]);
         $shop->save();
         return redirect()->route('AddShop');
+    }
+
+    public function getUserLocations($userid)
+    {
+        $data = DB::table('locations')
+        ->join('provided_by', 'provided_by.location_id', '=', 'locations.id')
+        // ->join('services', 'services.id', '=', 'provided_by.service_id')
+        ->select('provided_by.location_id', 'locations.h_no', 'locations.street', 'locations.locality', 'locations.city', 'locations.state', 
+                'locations.pincode', 'locations.shopphone', 'locations.shopname')
+        ->where('provided_by.serviceprovider_id', '=', $userid)
+        ->distinct()
+        ->get();
+        return view('serviceprovider.AddShop', compact('data'));
+    }
+
+    public function getServForLocations($locid)
+    {
+        $data = DB::table('provided_by')
+        ->where([
+            ['location_id',$locid]
+            ])
+        ->get();
+        return response()->json($data);
     }
 
     /**

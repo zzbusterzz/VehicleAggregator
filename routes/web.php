@@ -48,7 +48,11 @@ Route::view('vendordashboard', 'vendor.dashboard')->name('vendordashboard');
 Route::view('spdashboard', 'serviceprovider.dashboard')->name('spdashboard');
 Route::view('pendingrequests', 'serviceprovider.pendingrequests')->name('pendingrequests');
 Route::view('completedrequests', 'serviceprovider.completedrequests')->name('completedrequests');
-ROute::view('addshop', 'serviceprovider.AddShop')->name('addshop');
+
+
+Route::get('getshoplocations/{userid}', 'ShopController@getUserLocations')->name('getshoplocations');
+Route::get('/getservicesforlocation/{locid}', 'ShopController@getServForLocations');
+Route::post('/updatedelShop', 'ShopController@updatedelrecord')->name('updatedelShop');
 
 Route::get('/getStates/{service}','BookingsController@fetchStates');
 Route::get('/getCities/{service}/{state}','BookingsController@fetchCities');

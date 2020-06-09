@@ -27,10 +27,11 @@
         @elseif(Session::get('usertype') == 'sp_')         
             <li><a href="spdashboard">Dashboard</a></li>
             {{-- Dashboard will show new bookings which user can set status --}}
-            <li><a href="{{ route('ongoingrequests') }}">Pending Requests</a></li>
+            <li><a href="{{ route('pendingrequests') }}">Pending Requests</a></li>
             {{-- ongoingrequests --}}
             <li><a href="{{ route('completedrequests') }}">Completed Requests</a></li>
             {{-- completedrequests --}}
+            <li><a href="{{ route('getshoplocations', Session::get('user_id')) }}">Add Shop</a></li>
         @else
             <li><a href="#">Ongoing Requests</a></li>
             {{-- Dashboard will show ongoing bookings --}}

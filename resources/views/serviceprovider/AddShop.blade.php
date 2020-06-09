@@ -1,6 +1,3 @@
-@php( $services = \App\Service::all())
-
-
 @extends('master')
 
 @section('content')
@@ -29,23 +26,73 @@
         </style>
     </head>
 
+    {{-- https://www.webslesson.info/2019/04/how-to-join-multiple-table-in-laravel-58.html --}}
+    {{-- https://www.youtube.com/watch?v=4wJkDwKtZXw --}}   
     <body id="main_body"  style="height:1500px">
 
         @section('navbarButtons')
-        <li class="active"><a href="spdashboard">Ongoing Requests</a></li>
+        <li><a href="spdashboard">Ongoing Requests</a></li>
         {{-- Dashboard will show new bookings which user can set status --}}
         <li><a href="{{ route('pendingrequests') }}">Pending Requests</a></li>
         {{-- ongoingrequests --}}
         <li><a href="{{ route('completedrequests') }}">Completed Requests</a></li>
         {{-- completedrequests --}}
-        <li><a href="{{ route('addshop') }}">Add Shop</a></li>
+        <li class="active"><a href="{{ route('getshoplocations', Session::get('user_id')) }}">Add Shop</a></li>
         @endsection
 
         <div style="margin-top:50px">
             <div class="panel panel-info">
                 <div class="panel-heading"><b>Add a shop.</b></div>
-                <div class="panel-body">Add a new shop which can provide a service.</div>
-              </div>
+                    <div class="panel-body">
+
+                        @php
+                            $type = Session::get('usertype');
+                        @endphp
+                        
+
+                        <table class="table table-striped mb-0 table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Shop Name</th>
+                                <th scope="col">Address</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                
+
+                                @php
+                                    $i = 0;
+                                @endphp
+                                @foreach($data as $val)
+                                {{-- https://stackoverflow.com/questions/49768361/laravel-increment-id --}}
+                                <?php $i++ ?>
+                                <tr class='clickable-row' name ={{$val->location_id}}>
+                                    {{-- Get service id for displalying bookings
+                                        get vehiclebrand id for displaying car type
+                                        get location id for displlaying loc
+                                        --}}
+                                    <th scope="row">{{ $i}}</th>
+                                    <td>
+                                        <?php
+                                        $v1 = $val->shopname;
+                                        ?>
+            
+                                        {{
+                                            $v1
+                                        }}
+                                    </td>
+                                    <td> {{ $val->h_no }}{{ $val->street }} {{ $val->locality }} {{$val->city }} {{$val->state }}</td>
+                                    {{-- https://stackoverflow.com/questions/37460917/how-to-pass-value-on-onclick-function-in-laravel --}}
+                                    <td><button class="btn btn-primary" onclick="setupEdit( '{{$i}}' );">Edit Details</button></td>
+                                </tr>
+            
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
 
               <div style="margin-top:50px">
                 <div class="panel panel-info">
@@ -63,67 +110,170 @@
                         </div>
                         @endif
 
+                    {{-- https://laracasts.com/discuss/channels/laravel/how-do-i-handle-multiple-submit-buttons-in-a-single-form-with-laravel?page=1 --}}
                     <form method="post" action="{{url('shop')}}">
                             {{csrf_field()}}
-
-                            <label>Select a Service which the Shop provides. </label>
-
-                            <div>
-                                <select name="Service" id="Service">
-                                    @foreach($services as $service)
-                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
-                                    @endforeach
-                                    <option id="other" value="other">Other</option>
-                                </select>
-                            </div>
-                            <br>
                             <div class="form-group">
                                 <label>Shop No. </label>
-                                <input type="text" name="shopno" class="form-control" placeholder="Shop No." maxlength = "6"/>
+                                <input id="shopno" type="text" name="shopno" class="form-control" placeholder="Shop No." maxlength = "6"/>
                             </div>
                             <div class="form-group">
                                 <label>Shop Name</label>
-                                <input type="text" name="shopname" class="form-control" placeholder="Shop Name" />
+                                <input id="shopname" type="text" name="shopname" class="form-control" placeholder="Shop Name" />
                             </div>
                             <div class="form-group">
                                 <label>Shop Phone</label>
-                                <input type="text" name="shopphone" class="form-control" placeholder="Shop Phone" maxlength = "10"/>
+                                <input id="shopphone" type="text" name="shopphone" class="form-control" placeholder="Shop Phone" maxlength = "10"/>
                             </div>
                             <div>
                                 <h3><b>Location</b></h3>
                             </div>
                             <div class="form-group">
                                 <label>Street</label>
-                                <input type="text" name="street" class="form-control" placeholder="Street" />
+                                <input id="street" type="text" name="street" class="form-control" placeholder="Street" />
                             </div>
                             <div class="form-group">
                                 <label>Locality</label>
-                                <input type="text" name="locality" class="form-control" placeholder="Locality" />
+                                <input id="locality" type="text" name="locality" class="form-control" placeholder="Locality" />
                             </div>
                             <div class="form-group">
                                 <label>City</label>
-                                <input type="text" name="city" class="form-control" placeholder="City" />
+                                <input id="city" type="text" name="city" class="form-control" placeholder="City" />
                             </div>
                             <div class="form-group">
                                 <label>State</label>
-                                <input type="text" name="state" class="form-control" placeholder="State" />
+                                <input id="state" type="text" name="state" class="form-control" placeholder="State" />
                             </div>
                             <div class="form-group">
                                 <label>Pincode</label>
-                                <input type="text" name="pincode" class="form-control" placeholder="Pincode" maxlength = "6"/>
+                                <input id="pincode" type="text" name="pincode" class="form-control" placeholder="Pincode" maxlength = "6"/>
                             </div>
                             <br>
+
+                            <label>Select a Service which the Shop provides. </label>
+
+                            @php
+                                $services = \App\Service::all();
+
+                            @endphp
+
                             <div>
-                                <input type="submit" name="submit" value="Add Shop" class="btn btn-primary"/>
+                                {{-- <select name="Service" id="Service">
+                                    @foreach($services as $service)
+                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                    @endforeach
+                                    <option id="other" value="other">Other</option>
+                                </select> --}}
+
+                                @foreach($services as $service)                                
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="{{ $service->id }}" name="example1">
+                                        <label class="custom-control-label" for="{{ $service->id }}">{{ $service->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <br>
+
+                            <div id="locationidStore" name="none">
+                                <input id="submitDet"           type="submit" name="action"           value="Add Shop"    class="btn btn-primary"/>
+
+                                <input id="clearform"           type="submit" name="action"              value="Clear"       class="btn btn-primary"     onclick = "clearFields();" style="display:none"/>
+                                <input id="deleteshopdetails"   type="submit" name="action"  value="Delete"      class="btn btn-primary"     onclick = "deleteShop();" style="display:none"/>
                             </div>
                         </form>
                     </div>
                   </div>
 
         </div>
-
-
-
-
     </body>
+
+    <script type="text/javascript">
+    function setupEdit(id)
+    {
+        alert(id);
+
+        var tempdata = JSON.parse('<?php echo($data); ?>');
+
+        var locationid = tempdata[id-1].location_id;
+
+        alert(tempdata.length);
+        $("#shopno").val(tempdata[id-1].h_no);
+        $("#shopname").val(tempdata[id-1].shopname);
+        $("#shopphone").val(tempdata[id-1].shopphone);
+        $("#street").val(tempdata[id-1].street);
+        $("#locality").val(tempdata[id-1].locality);
+        $("#city").val(tempdata[id-1].city);
+        $("#state").val(tempdata[id-1].state);
+        $("#pincode").val(tempdata[id-1].pincode);
+
+        // var services = JSON.parse('<?php echo($services); ?>');
+
+        // $.ajax({
+        //         type:"get",
+        //         url:'/getServicesForLocation/'+ tempdata[id-1].location_id,
+        //         success:function(res)
+        //         {
+        //             if(res)
+        //             {
+        //                 for(int i = 0; i < res.length; i++){
+        //                     for(int j = 0;; j < services.length; j++){
+        //                         if(res[i].service_id == services[j].id){
+        //                             var checkBoxes = $("#"+res[i].service_id);
+        //                             checkBoxes.prop("checked", true);
+        //                         }
+        //                     } 
+        //                 }
+                        
+        //             }
+        //         }
+        //     });
+
+
+        // id="shopname"
+        // id="shopphone" 
+        // id="street"
+        // id="locality"
+        // id="city" 
+        // id="state"  
+        // id="pincode"
+
+        $("#submitDet").val("Update");
+        $("#clearform").show();
+        $("#deleteshopdetails").show();
+    }
+
+    function clearFields()
+    {
+        var services = JSON.parse('<?php echo($services); ?>');
+        for(int i = 0; i < res.length; i++){
+            var checkBoxes = $("#"+res[i].service_id);
+            checkBoxes.prop("checked", false);   
+        }
+
+        $("#shopname").val();
+        $("#shopphone").val();
+        $("#street").val();
+        $("#locality").val();
+        $("#city").val();
+        $("#state").val();
+        $("#pincode").val();
+
+        $("#submitDet").val("Add_Shop");
+
+        $("#clearform").hide();
+        $("#deleteshopdetails").hide();
+    }
+
+    function updateShop()
+    {
+        alert("Updating");
+
+        clearFields();
+    }
+
+    function deleteShop(){
+        
+        clearFields();
+    }
+    </script>
     @endsection
