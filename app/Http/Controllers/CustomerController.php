@@ -47,7 +47,7 @@ class CustomerController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'password' => 'required|confirmed|min:6',
-            'password_confirmation' => 'required|same:new_password',
+            'password_confirmation' => 'required|same:password',
             'phone' => 'required',
             'email' => 'required',
         ]);
@@ -65,8 +65,8 @@ class CustomerController extends Controller
                 'phone' => $request->get('phone'),
                 'email' => $request->get('email'),
             ]);
-            
-            
+
+
             $customers->save();
         } elseif($request->get('usertype') == "sp_" ){
             $customers = new ServiceProvider([
@@ -87,7 +87,7 @@ class CustomerController extends Controller
                 'phone' => $request->get('phone'),
                 'email' => $request->get('email'),
             ]);
-            
+
             $customers->save();
         }
 
@@ -108,7 +108,7 @@ class CustomerController extends Controller
         $phone = $request->input('phone');
         $email = $request->input('email');
 
-        
+
         $utype = $request->session()->get('usertype');
         $userid =  $request->session()->get('user_id');
 
@@ -137,7 +137,7 @@ class CustomerController extends Controller
             'new_password' => 'required|min:6|different:old_password',
             'confirm_password' => 'required|min:6|same:new_password'
         ]);
-        
+
         $utype = $request->session()->get('usertype');
         $userid =  $request->session()->get('user_id');
 
@@ -150,7 +150,7 @@ class CustomerController extends Controller
         } else if($utype == "ven_"){
             $checkLogin = DB::table('vendors')->where(['id'=>$userid])->get();
         }
-        
+
         if(!$checkLogin->isEmpty() && !Hash::check($request->input('old_password'), optional($checkLogin)->first()->password)){
             return back()->with('errorpwd','The specified password does not match the database password');
         }else{

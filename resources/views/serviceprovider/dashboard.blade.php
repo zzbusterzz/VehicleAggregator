@@ -42,8 +42,13 @@
         <div class="container" style="margin-top:50px">
             <b>Dashboard</b>
 
+            <div class="table-wrapper-scroll-y my-custom-scrollbar display-none" style="margin-top:10px" id="dbcontainer">
+
+
+            </div>
+
     </body>
 
 
 
-@endsection
+    @endsection

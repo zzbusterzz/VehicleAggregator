@@ -16,7 +16,7 @@ Route::get('/', function () {//Default route to login
   //return view('customer.create');
 });
 
-Route::view('/login', 'login.login');
+Route::view('/login', 'login.login')->name('login');;
 Route::post('/loginme', 'LoginController@login');
 Route::post('/registerBooking', 'BookingsController@bookservice');
 Route::post('/login', 'LoginController@login')->name('login');
@@ -24,7 +24,7 @@ Route::post('/login', 'LoginController@logout')->name('logout');
 
 Route::resource('customer', 'CustomerController');
 
-Route::view('/register', 'customer.register');
+Route::view('/register', 'customer.register')->name('register');
 Route::post('/register', 'CustomerController@login')->name('register');
 
 
@@ -79,4 +79,3 @@ Route::post('/adminSignin', 'AdminController@adminSignin');
 Route::get('/adminSignin', function () {
     return view('login/adminLogin');
 });
-
