@@ -177,8 +177,8 @@
                             <div id="locationidStore" name="none">
                                 <input id="submitDet"           type="submit" name="action"           value="Add Shop"    class="btn btn-primary"/>
 
-                                <input id="clearform"           type="submit" name="action"              value="Clear"       class="btn btn-primary"     onclick = "clearFields();" style="display:none"/>
-                                <input id="deleteshopdetails"   type="submit" name="action"  value="Delete"      class="btn btn-primary"     onclick = "deleteShop();" style="display:none"/>
+                                <input id="clearform"            name="action"              value="Clear"       class="btn btn-primary"     onclick = "clearFields();" style="display:none"/>
+                                <input id="deleteshopdetails"   type="submit" name="action"  value="Delete"      class="btn btn-primary"    style="display:none"/>
                             </div>
                         </form>
                     </div>
@@ -188,15 +188,18 @@
     </body>
 
     <script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     function setupEdit(id)
     {
-        alert(id);
-
         var tempdata = JSON.parse('<?php echo($data); ?>');
 
         var locationid = tempdata[id-1].location_id;
-
-        alert(tempdata.length);
+        
         $("#shopno").val(tempdata[id-1].h_no);
         $("#shopname").val(tempdata[id-1].shopname);
         $("#shopphone").val(tempdata[id-1].shopphone);
@@ -206,27 +209,27 @@
         $("#state").val(tempdata[id-1].state);
         $("#pincode").val(tempdata[id-1].pincode);
 
-        // var services = JSON.parse('<?php echo($services); ?>');
-
-        // $.ajax({
-        //         type:"get",
-        //         url:'/getServicesForLocation/'+ tempdata[id-1].location_id,
-        //         success:function(res)
-        //         {
-        //             if(res)
-        //             {
-        //                 for(int i = 0; i < res.length; i++){
-        //                     for(int j = 0;; j < services.length; j++){
-        //                         if(res[i].service_id == services[j].id){
-        //                             var checkBoxes = $("#"+res[i].service_id);
-        //                             checkBoxes.prop("checked", true);
-        //                         }
-        //                     } 
-        //                 }
-                        
-        //             }
-        //         }
-        //     });
+        
+        $.ajax({
+                type:"get",
+                url:'/getservicesforlocation/'+ locationid,
+                success:function(res)
+                {
+                    if(res)
+                    {
+                        var services = JSON.parse('<?php echo($services); ?>');
+                        alert(services.length);
+                        for(var i = 0; i < res.length; i++){
+                            for(var j = 0; j < services.length; j++){
+                                if(res[i].service_id == services[j].id){
+                                    var checkBoxes = $("#"+res[i].service_id);
+                                    checkBoxes.prop("checked", true);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
 
 
         // id="shopname"
@@ -245,35 +248,24 @@
     function clearFields()
     {
         var services = JSON.parse('<?php echo($services); ?>');
-        for(int i = 0; i < res.length; i++){
-            var checkBoxes = $("#"+res[i].service_id);
+        for(var i = 0; i < services.length; i++){
+            var checkBoxes = $("#"+services[i].id);
             checkBoxes.prop("checked", false);   
         }
+     
+        $("#shopno").val("");
+        $("#shopname").val("");
+        $("#shopphone").val("");
+        $("#street").val("");
+        $("#locality").val("");
+        $("#city").val("");
+        $("#state").val("");
+        $("#pincode").val("");
 
-        $("#shopname").val();
-        $("#shopphone").val();
-        $("#street").val();
-        $("#locality").val();
-        $("#city").val();
-        $("#state").val();
-        $("#pincode").val();
-
-        $("#submitDet").val("Add_Shop");
+        $("#submitDet").val("Add Shop");
 
         $("#clearform").hide();
         $("#deleteshopdetails").hide();
-    }
-
-    function updateShop()
-    {
-        alert("Updating");
-
-        clearFields();
-    }
-
-    function deleteShop(){
-        
-        clearFields();
     }
     </script>
     @endsection
