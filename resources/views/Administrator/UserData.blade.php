@@ -1,3 +1,7 @@
+@php( $users = \App\Customer::all())
+@php( $sps = \App\ServiceProvider::all())
+@php( $vens = \App\Vendor::all())
+
 @extends('master')
 
 @section('content')
@@ -36,33 +40,107 @@
         @endsection
 
         <div style="margin-top:50px">
-        <h1>Customer</h1>
-        <p><b>Customer Data</b></p>
-        <p>Username</p>
-        <p>First Name</p>
-        <p>Last Name</p>
-        <p>Phone</p>
-        <p>Email</p>
-        <p>DELETE USER</p>
+            <div class="panel panel-info">
+                <div class="panel-heading"><h1>Customers</h1></div>
+                    <div class="panel-body">
+                        <div>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Operation</th>
+                                    </tr>
+                                </thead>
+                                @foreach ($users as $user)
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">{{ $user->id }}</th>
+                                        <td>{{ $user->username }}</td>
+                                        <td>{{ $user->firstname }}</td>
+                                        <td>{{ $user->lastname }}</td>
+                                        <td>{{ $user->phone }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td><input type="submit" name="submit" value="Remove Customer" class="btn btn-primary"/></td>
+                                    </tr>
+                                </tbody>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-        <h1>Service Providers</h1>
-        <p><b>Service Providers Data</b></p>
-        <p>Username</p>
-        <p>First Name</p>
-        <p>Last Name</p>
-        <p>Phone</p>
-        <p>Email</p>
-        <p>DELETE USER</p>
+                <div class="panel panel-info">
+                    <div class="panel-heading"><h1>Service Providers</h1></div>
+                        <div class="panel-body">
+                            <div>
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                            <th scope="col">Phone</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Operation</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach ($sps as $sp)
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">{{ $sp->id }}</th>
+                                            <td>{{ $sp->username }}</td>
+                                            <td>{{ $sp->firstname }}</td>
+                                            <td>{{ $sp->lastname }}</td>
+                                            <td>{{ $sp->phone }}</td>
+                                            <td>{{ $sp->email }}</td>
+                                            <td><input type="submit" name="submit" value="Remove Service Provider" class="btn btn-primary"/></td>
+                                        </tr>
+                                    </tbody>
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
-        <h1>Vendors</h1>
-        <p><b>Vendors Data</b></p>
-        <p>Username</p>
-        <p>First Name</p>
-        <p>Last Name</p>
-        <p>Phone</p>
-        <p>Email</p>
-        <p>DELETE USER</p>
-        </div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading"><h1>Vendors</h1></div>
+                            <div class="panel-body">
+                                <div>
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">First Name</th>
+                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Operation</th>
+                                            </tr>
+                                        </thead>
+                                        @foreach ($vens as $ven)
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">{{ $ven->id }}</th>
+                                                <td>{{ $ven->username }}</td>
+                                                <td>{{ $ven->firstname }}</td>
+                                                <td>{{ $ven->lastname }}</td>
+                                                <td>{{ $ven->phone }}</td>
+                                                <td>{{ $ven->email }}</td>
+                                                <td><input type="submit" name="submit" value="Remove Vendor" class="btn btn-primary"/></td>
+                                            </tr>
+                                        </tbody>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
     </body>
 

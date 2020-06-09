@@ -82,3 +82,5 @@ Route::get('/adminSignin', function () {
 });
 
 Route::resource('serviceprovider', 'ShopController');
+
+Route::get('view-records','AdminDatabaseController@index');

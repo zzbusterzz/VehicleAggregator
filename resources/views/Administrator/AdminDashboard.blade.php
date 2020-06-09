@@ -40,6 +40,8 @@
         <h1>ADMIN SECTION</h1>
         </div>
 
+        
+
     </body>
 
 @endsection
