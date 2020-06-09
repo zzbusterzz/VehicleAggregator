@@ -79,3 +79,6 @@ Route::post('/adminSignin', 'AdminController@adminSignin');
 Route::get('/adminSignin', function () {
     return view('login/adminLogin');
 });
+
+
+Route::resource('serviceprovider', 'ServiceProviderController');
