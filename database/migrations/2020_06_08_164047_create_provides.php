@@ -15,7 +15,6 @@ class CreateProvides extends Migration
     {
         Schema::create('provides', function (Blueprint $table) {
             $table->integer('bill_no');
-            $table->integer('vehiclebrand_id');
             $table->integer('cutomertype');//cus,
             $table->integer('customer_id');
             $table->date('booking_date');

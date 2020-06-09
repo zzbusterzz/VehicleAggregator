@@ -18,7 +18,9 @@ class CreateProductsTable extends Migration
             $table->integer('vehicle_brand_id');
             $table->string('name',64);
             $table->text('partdetails');
-            $table->integer('partprice');
+            $table->float('price');
+            $table->string('category');
+            $table->binary('image');
         });
     }
 
