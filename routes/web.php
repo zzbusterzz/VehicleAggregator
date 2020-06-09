@@ -28,8 +28,8 @@ Route::view('/register', 'customer.register')->name('register');
 Route::post('/register', 'CustomerController@login')->name('register');
 
 
-Route::post('/updateProfile', 'CustomerController@updateUserProfile')->name('updateprofile');
-Route::post('/updatePassword', 'CustomerController@updateUserPassword')->name('updatepassword');
+Route::post('/updateprofile', 'CustomerController@updateUserProfile')->name('updateprofile');
+Route::post('/updatepassword', 'CustomerController@updateUserPassword')->name('updatepassword');
 
 Route::view('/type', 'accountType');
 Route::post('/type', 'TypeController@login')->name('accountType');

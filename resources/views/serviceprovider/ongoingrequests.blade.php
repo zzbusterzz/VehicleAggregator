@@ -1,5 +1,3 @@
-@php( $services = \App\Service::all())
-
 @extends('master')
 
 @section('content')

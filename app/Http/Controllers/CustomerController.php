@@ -132,7 +132,7 @@ class CustomerController extends Controller
 
     public function updateUserPassword(Request $request){
 
-        $request->validate([//vallidation bugged
+        $request->validate([
             'old_password' => 'required',
             'new_password' => 'required|min:6|different:old_password',
             'confirm_password' => 'required|min:6|same:new_password'
