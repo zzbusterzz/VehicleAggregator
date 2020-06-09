@@ -73,7 +73,7 @@
               <ul class="dropdown-menu" >
                   <li><a href="{{ route('customerprofile') }}"><i class="fa fa-cog"></i> Profile</a></li>
                   <li class="divider"></li>
-                  <li><a href="{{ route('login') }}"><i class="fa fa-sign-out"></i> Sign-out</a></li>
+                  <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Sign-out</a></li>
               </ul>              
             </li>            
           </div>

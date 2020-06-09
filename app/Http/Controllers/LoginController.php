@@ -136,4 +136,10 @@ class LoginController extends Controller
             echo "Login Failed";
         }
     }
+
+    public function logout(Request $req) {
+        Auth::logout();
+        Session::flush();
+        return Redirect::to('login');
+    }
 }

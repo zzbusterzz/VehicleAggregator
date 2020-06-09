@@ -20,6 +20,7 @@ Route::view('/login', 'login.login');
 Route::post('/loginme', 'LoginController@login');
 Route::post('/registerBooking', 'BookingsController@bookservice');
 Route::post('/login', 'LoginController@login')->name('login');
+Route::post('/login', 'LoginController@logout')->name('logout');
 
 Route::resource('customer', 'CustomerController');
 
