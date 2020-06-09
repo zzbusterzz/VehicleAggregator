@@ -106,14 +106,11 @@ class LoginController extends Controller
         $utype = $req->input('usertype');
         
         if($utype == "cus_") {
-            $checkLogin = DB::table('customers')->where(['username'=>str_replace("cus_","",$username)])->get();
-            $userType = 0;
+            $checkLogin = DB::table('customers')->where(['username'=>$username])->get();
         } else if($utype == "sp_"){
-            $checkLogin = DB::table('service_providers')->where(['username'=>str_replace("sp_","",$username)])->get();
-            $userType = 1;
+            $checkLogin = DB::table('service_providers')->where(['username'=>$username])->get();
         } else if($utype == "ven_"){
-            $checkLogin = DB::table('vendors')->where(['username'=>str_replace("ven_","",$username)])->get();
-            $userType = 2;
+            $checkLogin = DB::table('vendors')->where(['username'=>$username])->get();
         }
 
 
@@ -126,20 +123,6 @@ class LoginController extends Controller
             $req->session()->put('user_name', $username);
 
             //Redirect here based on customer,vendor,ServivceProvider
-            //return redirect('customerdashboard');//default return is customer dashboard
-            //return redirect('vendordashboard');//redirect to vendor dashboard
-            //return redirect('spdashboard');//redirect to SP dashboard
-
-
-            //endsWith function is above logiin function
-            // if(beginsWith($username, "cus_")){
-            //     return redirect('customerdashboard');
-            // } else if(endsWith($username, "sp_")){
-            //     return redirect('spdashboard');
-            // } else if(endsWith($username, "ven_")){
-            //     return redirect('vendordashboard');
-            // }
-
             if($utype == "cus_") {
                 return redirect('customerdashboard');
             } else if($utype == "sp_"){

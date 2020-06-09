@@ -26,6 +26,10 @@ Route::resource('customer', 'CustomerController');
 Route::view('/register', 'customer.register');
 Route::post('/register', 'CustomerController@login')->name('register');
 
+
+Route::post('/updateProfile', 'CustomerController@updateUserProfile')->name('updateProfile');
+Route::post('/updatePassword', 'CustomerController@updateUserPassword')->name('updatePassword');
+
 Route::view('/type', 'accountType');
 Route::post('/type', 'TypeController@login')->name('accountType');
 
@@ -52,7 +56,6 @@ Route::view('ServiceProviderChangePassword', 'serviceprovider.ServiceProviderCha
 
 Route::view('PendingRequests', 'serviceprovider.PendingRequests')->name('PendingRequests');
 Route::view('CompletedRequests', 'serviceprovider.CompletedRequests')->name('CompletedRequests');
-
 
 Route::get('/getStates/{service}','BookingsController@fetchStates');
 Route::get('/getCities/{service}/{state}','BookingsController@fetchCities');
