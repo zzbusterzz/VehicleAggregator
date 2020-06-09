@@ -46,8 +46,9 @@ Route::view('customerchangepassword', 'customer.customerchangepassword')->name('
 Route::view('vendordashboard', 'vendor.dashboard')->name('vendordashboard');
 
 Route::view('spdashboard', 'serviceprovider.dashboard')->name('spdashboard');
-Route::view('ongoingrequests', 'serviceprovider.ongoingrequests')->name('ongoingrequests');
+Route::view('pendingrequests', 'serviceprovider.pendingrequests')->name('pendingrequests');
 Route::view('completedrequests', 'serviceprovider.completedrequests')->name('completedrequests');
+ROute::view('addshop', 'serviceprovider.AddShop')->name('addshop');
 
 Route::get('/getStates/{service}','BookingsController@fetchStates');
 Route::get('/getCities/{service}/{state}','BookingsController@fetchCities');
@@ -80,5 +81,4 @@ Route::get('/adminSignin', function () {
     return view('login/adminLogin');
 });
 
-
-Route::resource('serviceprovider', 'ServiceProviderController');
+Route::resource('serviceprovider', 'ShopController');

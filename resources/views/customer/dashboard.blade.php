@@ -75,11 +75,11 @@
                             --}}
                         <th scope="row">{{ $i}}</th>
                         <td>
-                            <?php 
+                            <?php
                             $v1 = $val->service_id;
                             ?>
 
-                            {{ 
+                            {{
                                 $v1
                             }}
                         </td>
@@ -203,11 +203,11 @@
             //Stores currently selected table values
             var service_id, vehiclebrand_id, location_id, serviceprovider_id, appointment_date, appointment_time, vehicleno, yearofmfc, status;
 
-            //Fetch all these elements from queries which are 
+            //Fetch all these elements from queries which are
             //vehicle brand, vehicle model, service provider name
             //location and service type
-            var vBrand, vModel, sProvider, location, sType; 
-            
+            var vBrand, vModel, sProvider, location, sType;
+
             var temp;
 
             for (var i = 0; i < tempdata.length; i++){
@@ -232,7 +232,7 @@
             $(".modal-body #vModel").val('');
             $(".modal-body #location").val('');
             $(".modal-body #sProvider").val('' );
-           
+
 
             $.ajax({
                 type:"get",

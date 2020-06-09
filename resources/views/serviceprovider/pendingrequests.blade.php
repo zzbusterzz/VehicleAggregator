@@ -44,7 +44,7 @@
             $type = Session::get('usertype');
 
             $data = \App\Requests::where('serviceprovider_id', Session::get('user_id'))
-                        ->where('status', 'Ongoing')
+                        ->where('status', 'Pending')
                         ->get();
 
                         $services = App\Service::All();
