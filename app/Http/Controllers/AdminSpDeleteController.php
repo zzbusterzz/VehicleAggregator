@@ -7,7 +7,7 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AdminDatabaseController extends Controller
+class AdminSpDeleteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +16,8 @@ class AdminDatabaseController extends Controller
      */
     public function index()
     {
-        $users = DB::select('select * from customers');
-        return view('Administrator.UserData',['users'=>$users]);
-
-
-
-
-
+        $sp = DB::select('select * from service_providers');
+        return view('Administrator.UserData',['sps'=>$sp]);
     }
 
     /**
@@ -88,8 +83,7 @@ class AdminDatabaseController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('delete from customers where id = ?',[$id]);
+        DB::delete('delete from service_providers where id = ?',[$id]);
         return view('Administrator.UserData');
-
     }
 }

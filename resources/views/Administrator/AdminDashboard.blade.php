@@ -36,11 +36,10 @@
         @endsection
 
         <div style="margin-top:50px">
-        <h4><b>Welcome to WheelWorks <i>{{ Session::get('user_name') }}</i>!<b></h4>
-        <h1>ADMIN SECTION</h1>
+        @include('logo')
         </div>
 
-        
+
 
     </body>
 

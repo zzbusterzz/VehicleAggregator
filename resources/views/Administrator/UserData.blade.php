@@ -65,7 +65,7 @@
                                         <td>{{ $user->lastname }}</td>
                                         <td>{{ $user->phone }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td><input type="submit" name="submit" value="Remove Customer" class="btn btn-primary"/></td>
+                                    <td><a href = 'delete/{{ $user->id }}'><input type="submit" name="submit" value="Remove Customer" class="btn btn-primary"/></a></td>
                                     </tr>
                                 </tbody>
                                 @endforeach
@@ -99,7 +99,7 @@
                                             <td>{{ $sp->lastname }}</td>
                                             <td>{{ $sp->phone }}</td>
                                             <td>{{ $sp->email }}</td>
-                                            <td><input type="submit" name="submit" value="Remove Service Provider" class="btn btn-primary"/></td>
+                                            <td><a href = 'deletesp/{{ $sp->id }}'><input type="submit" name="submit" value="Remove Service Provider" class="btn btn-primary"/></a></td>
                                         </tr>
                                     </tbody>
                                     @endforeach
@@ -133,7 +133,7 @@
                                                 <td>{{ $ven->lastname }}</td>
                                                 <td>{{ $ven->phone }}</td>
                                                 <td>{{ $ven->email }}</td>
-                                                <td><input type="submit" name="submit" value="Remove Vendor" class="btn btn-primary"/></td>
+                                                <td><a href = 'deleteven/{{ $sp->id }}'><input type="submit" name="submit" value="Remove Vendor" class="btn btn-primary"/></a></td>
                                             </tr>
                                         </tbody>
                                         @endforeach

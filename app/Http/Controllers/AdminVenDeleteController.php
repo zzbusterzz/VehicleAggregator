@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
-class AdminDatabaseController extends Controller
+class AdminVenDeleteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +13,8 @@ class AdminDatabaseController extends Controller
      */
     public function index()
     {
-        $users = DB::select('select * from customers');
-        return view('Administrator.UserData',['users'=>$users]);
-
-
-
-
-
+        $ven = DB::select('select * from vendors');
+        return view('Administrator.UserData',['vens'=>$ven]);
     }
 
     /**
@@ -88,8 +80,7 @@ class AdminDatabaseController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('delete from customers where id = ?',[$id]);
+        DB::delete('delete from vendors where id = ?',[$id]);
         return view('Administrator.UserData');
-
     }
 }

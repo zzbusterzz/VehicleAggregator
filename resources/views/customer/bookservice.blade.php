@@ -7,9 +7,19 @@
     <head>
         @extends('layout.header');
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-    </head>
 
-    <body id="main_body" >
+        <style>
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #222222;
+                color: white;
+                text-align: center;
+            }
+        </style>
+    </head>
 
         @section('navbarButtons')
         {{-- https://stackoverflow.com/questions/38709886/call-route-from-button-click-laravel --}}
@@ -20,19 +30,21 @@
         @endsection
 
         <div class="container" style="margin-top:50px">
-            <h5><b>Instructions</b></h5>
-            <div class="panel panel-default">
-            <ol>
-                <br>
-                <li>Select the type of service which you require from the drop down box below.</li>
-                <li>Available locations will be provided to you where the service of your choosing is available.</li>
-                <li>Select State and City from the options. Which will further provide you with the authorised service provider available in that area.</li>
-                <li>Select a Service Provider.</li>
-                <li>Based on your choosing you will be able to choose an appointment time by providing Vehicle details.</li>
-                <li>Click Submit and wait for the Provider to contact you!</li>
-                <br>
-            </ol>
-            </div>
+            <div class="panel panel-info"">
+                <div class="panel-heading"><h4><b>Instructions for booking.</b></h4></div>
+                    <div class="panel-body">
+                        <ol>
+                            <br>
+                            <li>Select the type of service which you require from the drop down box below.</li>
+                            <li>Available locations will be provided to you where the service of your choosing is available.</li>
+                            <li>Select State and City from the options. Which will further provide you with the authorised service provider available in that area.</li>
+                            <li>Select a Service Provider.</li>
+                            <li>Based on your choosing you will be able to choose an appointment time by providing Vehicle details.</li>
+                            <li>Click Submit and wait for the Provider to contact you!</li>
+                            <br>
+                        </ol>
+                    </div>
+                </div>
         </div>
 
         <div class="container" style="margin-top:10px">
