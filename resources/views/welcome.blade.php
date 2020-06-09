@@ -82,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    🎡 Wheel Works!
+                    <img src="images/WhiteTitle.png" alt="logo">
                 </div>
             </div>
         </div>

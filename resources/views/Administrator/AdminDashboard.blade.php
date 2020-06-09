@@ -36,7 +36,7 @@
         @endsection
 
         <div style="margin-top:50px">
-        @include('logo')
+            <img src="images/WhiteTitle.png" alt="logo" style="vertical-align:middle;margin:0px 50px">
         </div>
 
 
