@@ -25,9 +25,22 @@
         @endsection
 
         @php
-            $data = \App\Customer::select('firstname', 'lastname','phone','email')
+            $type = Session::get('usertype');
+            
+            if($type == "cus_"){
+                $data = \App\Customer::select('firstname', 'lastname','phone','email')
                         ->where('id', Session::get('user_id'))
                         ->get();
+            }else if($type == "sp_"){
+                $data = \App\ServiceProvider::select('firstname', 'lastname','phone','email')
+                        ->where('id', Session::get('user_id'))
+                        ->get();
+            }else{
+                $data = \App\Vendor::select('firstname', 'lastname','phone','email')
+                        ->where('id', Session::get('user_id'))
+                        ->get();
+            }
+            
         @endphp
 
         {{-- https://www.digitalocean.com/community/tutorials/how-to-implement-password-verification-using-laravel-form-request --}}
