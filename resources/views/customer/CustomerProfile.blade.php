@@ -31,7 +31,7 @@
         @endphp
 
         {{-- https://www.digitalocean.com/community/tutorials/how-to-implement-password-verification-using-laravel-form-request --}}
-        <form action="/updateProfile" method="POST">
+        <form action="/updateprofile" method="POST">
             {{csrf_field()}}
             <div class="panel panel-default" style="margin-top:40px">
                 <div class="panel-heading"><h4>Profile</h4></div>
@@ -89,7 +89,7 @@
             </div>
         </form>
 
-        <form action="/updatePassword" method="POST">
+        <form action="/updatepassword" method="POST">
             {{csrf_field()}}
             <div class="panel panel-default">
                 <div class="panel-heading"><h4>Password</h4></div>
