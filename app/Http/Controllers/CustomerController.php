@@ -108,6 +108,7 @@ class CustomerController extends Controller
         $phone = $request->input('phone');
         $email = $request->input('email');
 
+        
         $utype = $request->session()->get('usertype');
         $userid =  $request->session()->get('user_id');
 
