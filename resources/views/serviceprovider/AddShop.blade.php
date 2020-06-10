@@ -261,7 +261,6 @@
                     if(res)
                     {
                         var services = JSON.parse('<?php echo($services); ?>');
-                        alert(services.length);
                         for(var i = 0; i < res.length; i++){
                             for(var j = 0; j < services.length; j++){
                                 if(res[i].service_id == services[j].id){
