@@ -35,7 +35,7 @@
         @else
             <li><a href="{{ route('vendordashboard') }}">Dashboard</a></li>
             <li><a href="{{ route('vendorreadyorder') }}">Ready Order</a></li>
-            <li><a href="{{ route('vendorcomplete') }}">Complete Order</a></li>
+            <li><a href="{{ route('vendorcompleteorder') }}">Complete Order</a></li>
             <li><a href="{{ route('vendorinventory') }}">Parts Inventory</a></li> {{--To view the stock available and to add or remove stock--}}
         @endif
 

@@ -9,14 +9,14 @@
 
     <body id="main_body"  style="height:1500px">
         @php 
-            $categories = \App\Category::all();
+            $categories = \App\ProductCategory::all();
         
         @endphp
 
         @section('navbarButtons')
         <li><a href="{{ route('vendordashboard') }}">Dashboard</a></li>
         <li class="active"><a href="{{ route('vendorreadyorder') }}">Ready Order</a></li>
-        <li><a href="{{ route('vendorcomplete') }}">Complete Order</a></li>
+        <li><a href="{{ route('vendorcompleteorder') }}">Complete Order</a></li>
         <li><a href="{{ route('vendorinventory') }}">Parts Inventory</a></li> {{--To view the stock available and to add or remove stock--}}
         @endsection
 

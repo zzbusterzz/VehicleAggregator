@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class BelongsTo extends Model
 {
-    //
+    protected $table = 'belongs_to';
+
     public $timestamps = false;
+
     protected $fillable = [
-        'name', 'partdetails', 'price', 'category', 'image'
+        'vehiclebrand_id', 'part_id'
     ];
 }

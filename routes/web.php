@@ -46,7 +46,9 @@ Route::view('customerchangepassword', 'customer.customerchangepassword')->name('
 Route::view('vendordashboard', 'vendor.dashboard')->name('vendordashboard');//New Order
 Route::view('vendorinventory', 'vendor.inventory')->name('vendorinventory');
 Route::view('vendorreadyorder', 'vendor.readyorder')->name('vendorreadyorder');//Ongoing
-Route::view('vendordashboard', 'vendor.completedorder')->name('vendorcomplete');//Closed (can be complete or rejected)
+Route::view('vendorcompleteorder', 'vendor.completedorder')->name('vendorcompleteorder');//Closed (can be complete or rejected)
+
+Route::post('/addproduct', 'InventoryController@addProduct')->name('addproduct');
 
 
 Route::view('spdashboard', 'serviceprovider.dashboard')->name('spdashboard');
