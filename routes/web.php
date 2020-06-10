@@ -52,7 +52,7 @@ Route::view('completedrequests', 'serviceprovider.completedrequests')->name('com
 
 Route::get('getshoplocations/{userid}', 'ShopController@getUserLocations')->name('getshoplocations');
 Route::get('/getservicesforlocation/{locid}', 'ShopController@getServForLocations');
-Route::post('/updatedelShop', 'ShopController@updatedelrecord')->name('updatedelShop');
+Route::post('/updatedelShop', 'ShopController@updateadddelloc')->name('updatedelShop');
 
 Route::get('/getStates/{service}','BookingsController@fetchStates');
 Route::get('/getCities/{service}/{state}','BookingsController@fetchCities');

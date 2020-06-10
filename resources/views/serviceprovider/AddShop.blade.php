@@ -110,8 +110,29 @@
                         </div>
                         @endif
 
+                        @if (session('info'))
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    {{ session('infopwd') }}
+                                </div>
+                            </div>
+                        </div>
+                        @elseif (session('error'))
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    {{ session('errorpwd') }}
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+
                     {{-- https://laracasts.com/discuss/channels/laravel/how-do-i-handle-multiple-submit-buttons-in-a-single-form-with-laravel?page=1 --}}
-                    <form method="post" action="{{url('shop')}}">
+                    <form method="post" action="{{url('updatedelShop')}}">
                             {{csrf_field()}}
                             <div class="form-group">
                                 <label>Shop No. </label>
@@ -155,7 +176,17 @@
                             @php
                                 $services = \App\Service::all();
 
+                                $values = null;
+
+                                foreach ($services as $service) {
+                                    if($values == null)
+                                        $values = $service->id;
+                                    else
+                                        $values = $values .'/'. $service->id;
+                                }
                             @endphp
+
+                         
 
                             <div>
                                 {{-- <select name="Service" id="Service">
@@ -164,20 +195,30 @@
                                     @endforeach
                                     <option id="other" value="other">Other</option>
                                 </select> --}}
+                                
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                   
 
                                 @foreach($services as $service)                                
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="{{ $service->id }}" name="example1">
+                                        <input type="checkbox" class="custom-control-input" id="{{ $service->id }}" name="service[]" onclick="updateFieldValue('{{$service->id}}')"/>
+                                        <input id="servid{{ $service->id }}" type="text" name="{{ $service->id }}" class="form-control" style="display:none"/>
                                         <label class="custom-control-label" for="{{ $service->id }}">{{ $service->name }}</label>
                                     </div>
+                                    
+                                    <?php $i++ ?>
                                 @endforeach
                             </div>
+                                <input id="locid" type="text" name="locid" class="form-control" value ="" style="display:none"/> 
+                                <input id="servicevalues" type="text" name="servicevalues" class="form-control" value ="{{ $values }}" style="display:none"/>
                             <br>
 
-                            <div id="locationidStore" name="none">
+                            <div>
                                 <input id="submitDet"           type="submit" name="action"           value="Add Shop"    class="btn btn-primary"/>
 
-                                <input id="clearform"            name="action"              value="Clear"       class="btn btn-primary"     onclick = "clearFields();" style="display:none"/>
+                                <input id="clearform"           value="Clear"       class="btn btn-primary"     onclick = "clearFields();" style="display:none"/>
                                 <input id="deleteshopdetails"   type="submit" name="action"  value="Delete"      class="btn btn-primary"    style="display:none"/>
                             </div>
                         </form>
@@ -199,7 +240,9 @@
         var tempdata = JSON.parse('<?php echo($data); ?>');
 
         var locationid = tempdata[id-1].location_id;
-        
+
+        $("#locid").val(locationid);
+
         $("#shopno").val(tempdata[id-1].h_no);
         $("#shopname").val(tempdata[id-1].shopname);
         $("#shopphone").val(tempdata[id-1].shopphone);
@@ -224,6 +267,7 @@
                                 if(res[i].service_id == services[j].id){
                                     var checkBoxes = $("#"+res[i].service_id);
                                     checkBoxes.prop("checked", true);
+                                    updateFieldValue(res[i].service_id);
                                 }
                             }
                         }
@@ -250,9 +294,11 @@
         var services = JSON.parse('<?php echo($services); ?>');
         for(var i = 0; i < services.length; i++){
             var checkBoxes = $("#"+services[i].id);
-            checkBoxes.prop("checked", false);   
+            checkBoxes.prop("checked", false);
+            updateFieldValue(services[i].id);
         }
-     
+
+        $("#locid").val();
         $("#shopno").val("");
         $("#shopname").val("");
         $("#shopphone").val("");
@@ -261,11 +307,22 @@
         $("#city").val("");
         $("#state").val("");
         $("#pincode").val("");
+        $("#locationidStore").val("");
 
         $("#submitDet").val("Add Shop");
 
         $("#clearform").hide();
         $("#deleteshopdetails").hide();
+    }
+
+    function updateFieldValue(service_id){
+        var checkBoxes = $("#"+service_id);
+        if(checkBoxes.prop("checked")){
+            $("#servid"+service_id).val("true");
+        }
+        else{
+            $("#servid"+service_id).val("false");
+        }
     }
     </script>
     @endsection

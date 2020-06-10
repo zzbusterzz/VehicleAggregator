@@ -4,89 +4,148 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Shop;
+use App\Location;
+use App\ProvidedBy;
 use DB;
 
 class ShopController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function updateadddelloc(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('serviceprovider.AddShop');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function updatedelrecord(Request $request)
-    {
-
+ 
+        $result = 0;
         switch ($request->input('action')) {
-            case 'update':
-                // Save model
-                $test = 0;
+            case 'Update':
+                // Save model                
+                $this->validate($request, [
+                    'shopno' => 'required|max:8',
+                    'shopname' => 'required|max:128',
+                    'shopphone' => 'required|max:255',
+                    'street' => 'required|max:64',
+                    'locality' => 'required|max:64',
+                    'city' => 'required|max:64',
+                    'state' => 'required|max:64',
+                    'pincode' => 'required|max:11',
+                    'service' => 'required',
+                ]);               
+
+                $result = DB::table('locations')->where('id',  $request->input('locid'))
+                                                ->update([  'h_no' => $request->input('shopno'),                                                             
+                                                            'street' => $request->input('street'), 
+                                                            'locality' => $request->input('locality'),
+                                                            'city' => $request->input('city'), 
+                                                            'state' => $request->input('state'),
+                                                            'pincode' => $request->input('pincode'), 
+                                                            'shopphone' => $request->input('shopphone'),
+                                                            'shopname' => $request->input('shopname')]);
+                 
+                $userid =  $request->session()->get('user_id');                
+                $str_arr = explode ("/", $request->input('servicevalues'));
+                $result = DB::table('provided_bies')->where('location_id', $request->input('locid'))->delete();//clear linked data for that location
+                
+                foreach ($str_arr as $service)//enter data freshly
+                {
+                    if($request->input($service) == "true"){
+                        $provide = new ProvidedBy([                        
+                            'serviceprovider_id' => $userid,
+                            'location_id' => $request->input('locid'),
+                            'service_id' => $service,
+                        ]);
+                        $provide->save();
+                        $provide = null;
+                    }
+                }
+
+                return back()->with('info','Location Deleted Successfully');
                 break;
     
-            case 'delete':
-                // Preview model
-                $test = 0;
+            case 'Delete':
+                //locid               
+                $result = DB::table('locations')->where('id',  $request->input('locid'))
+                                                ->delete();
+                if($result != 1)
+                    return back()->with('error','Could not delete location');
+
+                $result = DB::table('provided_bies')->where('location_id', $request->input('locid'))
+                                        ->delete();
+
+
+                if($result == 1)
+                    return back()->with('info','Location Deleted Successfully');
+                else
+                    return back()->with('error','Could not delete location');
                 break;
     
             case 'Add Shop':
                 // Redirect to advanced edit
-                $test = 0;
+                $this->validate($request, [
+                    'shopno' => 'required|max:8',
+                    'shopname' => 'required|max:128',
+                    'shopphone' => 'required|max:255',
+                    'street' => 'required|max:64',
+                    'locality' => 'required|max:64',
+                    'city' => 'required|max:64',
+                    'state' => 'required|max:64',
+                    'pincode' => 'required|max:11',
+                    'service' => 'required',
+                ]);
+                
+                $location = new Location([                        
+                    'h_no' => $request->input('shopno'),                                                             
+                    'street' => $request->input('street'), 
+                    'locality' => $request->input('locality'),
+                    'city' => $request->input('city'), 
+                    'state' => $request->input('state'),
+                    'pincode' => $request->input('pincode'), 
+                    'shopphone' => $request->input('shopphone'),
+                    'shopname' => $request->input('shopname')
+                ]);
+                $result = $location->save();
+                
+                $result = DB::table('locations')
+                        ->select('locations.id')
+                        ->where([
+                        'h_no' => $request->input('shopno'),
+                        'street' => $request->input('street'), 
+                        'locality' => $request->input('locality'),
+                        'city' => $request->input('city'), 
+                        'state' => $request->input('state'),
+                        'pincode' => $request->input('pincode'), 
+                        'shopphone' => $request->input('shopphone'),
+                        'shopname' => $request->input('shopname')
+                    ])
+                    ->get();
+                
+                $locid = $result[0]->id;
+                $userid =  $request->session()->get('user_id');                
+                $str_arr = explode ("/", $request->input('servicevalues'));
+                
+                foreach ($str_arr as $service)//enter data freshly
+                {
+                    if($request->input($service) == "true"){
+                        $provide = new ProvidedBy([                        
+                            'serviceprovider_id' => $userid,
+                            'location_id' => $locid,
+                            'service_id' => $service,
+                        ]);
+                        $provide->save();
+                        $provide = null;
+                    }
+                }
+
+                return back()->with('info','Location Deleted Successfully');
                 break;
-        }
-
-        $this->validate($request, [
-            'shopno' => 'required',
-            'shopname' => 'required',
-            'shopphone' => 'required',
-            'street' => 'required',
-            'locality' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'pincode' => 'required'
-        ]);
-
-        $shop = new Location([
-            'shopno' => $request->get('shopno'),
-            'shopname' => $request->get('shopname'),
-            'shopphone' => $request->get('shopphone'),
-            'street' => $request->get('street'),
-            'locality' => $request->get('locality'),
-            'city' => $request->get('city'),
-            'state' => $request->get('state'),
-            'pincode' => $request->get('pincode')
-        ]);
-        $shop->save();
-        return redirect()->route('AddShop');
+        }       
     }
 
     public function getUserLocations($userid)
     {
         $data = DB::table('locations')
-        ->join('provided_by', 'provided_by.location_id', '=', 'locations.id')
-        // ->join('services', 'services.id', '=', 'provided_by.service_id')
-        ->select('provided_by.location_id', 'locations.h_no', 'locations.street', 'locations.locality', 'locations.city', 'locations.state', 
+        ->join('provided_bies', 'provided_bies.location_id', '=', 'locations.id')
+        // ->join('services', 'services.id', '=', 'provided_bies.service_id')
+        ->select('provided_bies.location_id', 'locations.h_no', 'locations.street', 'locations.locality', 'locations.city', 'locations.state', 
                 'locations.pincode', 'locations.shopphone', 'locations.shopname')
-        ->where('provided_by.serviceprovider_id', '=', $userid)
+        ->where('provided_bies.serviceprovider_id', '=', $userid)
         ->distinct()
         ->get();
         return view('serviceprovider.AddShop', compact('data'));
@@ -94,56 +153,11 @@ class ShopController extends Controller
 
     public function getServForLocations($locid)
     {
-        $data = DB::table('provided_by')
+        $data = DB::table('provided_bies')
         ->where([
             ['location_id',$locid]
             ])
         ->get();
         return response()->json($data);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
