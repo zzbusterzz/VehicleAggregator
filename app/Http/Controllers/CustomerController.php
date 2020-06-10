@@ -43,13 +43,13 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'username' => 'required|min:6',
+            'firstname' => 'required|alpha',
+            'lastname' => 'required|alpha',
             'password' => 'required|confirmed|min:6',
             'password_confirmation' => 'required|same:password',
-            'phone' => 'required',
-            'email' => 'required',
+            'phone' => 'required|min:10|numeric',
+            'email' => 'required|email',
         ]);
 
         $password = Hash::make($request->get('password'));
