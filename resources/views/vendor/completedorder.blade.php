@@ -16,8 +16,8 @@
         @section('navbarButtons')
         <li><a href="{{ route('vendordashboard') }}">Dashboard</a></li>
         <li><a href="{{ route('vendorreadyorder') }}">Ready Order</a></li>
-        <li><a href="{{ route('vendorcomplete') }}">Complete Order</a></li>
-        <li class="active"><a href="{{ route('vendorinventory') }}">Parts Inventory</a></li> {{--To view the stock available and to add or remove stock--}}
+        <li class="active"><a href="{{ route('vendorcomplete') }}">Complete Order</a></li>
+        <li><a href="{{ route('vendorinventory') }}">Parts Inventory</a></li> {{--To view the stock available and to add or remove stock--}}
         @endsection
 
         <div class="container" style="margin-top:50px">

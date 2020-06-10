@@ -43,7 +43,11 @@ Route::view('customerprofile', 'customer.customerprofile')->name('customerprofil
 Route::view('customerchangepassword', 'customer.customerchangepassword')->name('customerchangepassword');
 
 
-Route::view('vendordashboard', 'vendor.dashboard')->name('vendordashboard');
+Route::view('vendordashboard', 'vendor.dashboard')->name('vendordashboard');//New Order
+Route::view('vendorinventory', 'vendor.inventory')->name('vendorinventory');
+Route::view('vendorreadyorder', 'vendor.readyorder')->name('vendorreadyorder');//Ongoing
+Route::view('vendordashboard', 'vendor.completedorder')->name('vendorcomplete');//Closed (can be complete or rejected)
+
 
 Route::view('spdashboard', 'serviceprovider.dashboard')->name('spdashboard');
 Route::view('pendingrequests', 'serviceprovider.pendingrequests')->name('pendingrequests');
@@ -97,3 +101,6 @@ Route::get('deletesp/{id}','AdminSpDeleteController@destroy');
 
 Route::get('delete-records','AdminVenDeleteController@index');
 Route::get('deleteven/{id}','AdminVenDeleteController@destroy');
+
+
+

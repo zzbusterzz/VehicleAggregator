@@ -33,11 +33,10 @@
             {{-- completedrequests --}}
             <li><a href="{{ route('getshoplocations', Session::get('user_id')) }}">Add Shop</a></li>
         @else
-            <li><a href="#">Ongoing Requests</a></li>
-            {{-- Dashboard will show ongoing bookings --}}
-            <li><a href="#">Pending Requests</a></li>
-            <li><a href="#">Completed Requests</a></li>
-            <li><a href="#">Parts Inventory</a></li> {{--To view the stock available and to add or remove stock--}}
+            <li><a href="{{ route('vendordashboard') }}">Dashboard</a></li>
+            <li><a href="{{ route('vendorreadyorder') }}">Ready Order</a></li>
+            <li><a href="{{ route('vendorcomplete') }}">Complete Order</a></li>
+            <li><a href="{{ route('vendorinventory') }}">Parts Inventory</a></li> {{--To view the stock available and to add or remove stock--}}
         @endif
 
         
