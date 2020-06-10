@@ -23,11 +23,24 @@
             .display-none {
                 display: none;
             }
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #222222;
+                color: white;
+                text-align: center;
+            }
+
         </style>
     </head>
 
     <body id="main_body"  style="height:1500px">
-
+        <div class="footer">
+            <p>WheelWorks 2019-2020 ©<p>
+                <p>Making Vehicles Better For You since 2019!<p>
+        </div>
         @php
         $i = 0;
             $type = Session::get('usertype');
@@ -51,8 +64,6 @@
         {{-- https://stackoverflow.com/questions/41189695/route-not-defined-error-in-laravel-even-though-route-is-defined --}}
         @endsection
 
-
-     
         <div class="container" style="margin-top:50px">
 
             <table class="table table-striped mb-0 table-hover">

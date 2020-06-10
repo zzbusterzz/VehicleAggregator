@@ -86,3 +86,14 @@ Route::get('/adminSignin', function () {
 });
 
 Route::resource('serviceprovider', 'ShopController');
+
+Route::get('view-records','AdminDatabaseController@index');
+
+Route::get('delete-records','AdminDatabaseController@index');
+Route::get('delete/{id}','AdminDatabaseController@destroy');
+
+Route::get('delete-records','AdminSpDeleteController@index');
+Route::get('deletesp/{id}','AdminSpDeleteController@destroy');
+
+Route::get('delete-records','AdminVenDeleteController@index');
+Route::get('deleteven/{id}','AdminVenDeleteController@destroy');

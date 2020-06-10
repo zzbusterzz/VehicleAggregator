@@ -65,7 +65,7 @@
             @show
           </ul>
 
-          <div class="topnav-right">            
+          <div class="topnav-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="http://placehold.it/24x24" class="profile-image img-circle"> {{ Session::get('user_name') }} <b class="caret"></b>
@@ -74,8 +74,8 @@
                   <li><a href="{{ route('customerprofile') }}"><i class="fa fa-cog"></i> Profile</a></li>
                   <li class="divider"></li>
                   <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Sign-out</a></li>
-              </ul>              
-            </li>            
+              </ul>
+            </li>
           </div>
 
         </div>

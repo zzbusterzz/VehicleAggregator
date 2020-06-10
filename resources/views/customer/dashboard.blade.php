@@ -23,10 +23,23 @@
             .display-none {
                 display: none;
             }
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #222222;
+                color: white;
+                text-align: center;
+            }
         </style>
     </head>
-
+{{--https://www.w3schools.com/howto/howto_css_fixed_footer.asp--}}
     <body id="main_body">
+        <div class="footer">
+            <p>WheelWorks 2019-2020 ©<p>
+                <p>Making Vehicles Better For You since 2019!<p>
+          </div>
 
         @section('navbarButtons')
         {{-- https://stackoverflow.com/questions/38709886/call-route-from-button-click-laravel --}}
@@ -183,6 +196,7 @@
 
 
         </div>
+
 
     </body>
 
